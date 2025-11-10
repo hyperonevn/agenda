@@ -16,110 +16,128 @@
     --bg: #F7FAFF;
   }
 
-  body {
+  html, body {
     margin: 0;
+    padding: 0;
     font-family: "Inter", system-ui, sans-serif;
     background: var(--bg);
-    color: var(--ink);
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
 
-  /* ---- Gradient flow background ---- */
+  /* ==== Animated Gradient Background ==== */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: linear-gradient(120deg, rgba(46,169,255,0.12), rgba(255,179,71,0.08), rgba(255,208,116,0.12));
+    background: linear-gradient(135deg, rgba(46,169,255,0.15), rgba(255,179,71,0.12), rgba(255,208,116,0.15));
     background-size: 300% 300%;
-    animation: bgFlow 12s ease-in-out infinite;
-    z-index: -1;
+    animation: bgflow 14s ease-in-out infinite;
+    z-index: -2;
   }
-  @keyframes bgFlow {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+  @keyframes bgflow {
+    0%,100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 
-  /* ---- Header ---- */
+  /* ==== Floating Glow Orbs ==== */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.25;
+    z-index: -1;
+    animation: float 16s ease-in-out infinite alternate;
+  }
+  .orb.one { width: 280px; height: 280px; top: 10%; left: 5%; background: var(--blue);}
+  .orb.two { width: 220px; height: 220px; bottom: 10%; right: 10%; background: var(--orange);}
+  @keyframes float {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(60px) scale(1.15); }
+  }
+
+  /* ==== Header ==== */
   header {
     text-align: center;
-    padding: 90px 20px 40px;
+    padding: 120px 20px 60px;
     opacity: 0;
-    transform: translateY(40px);
-    animation: fadeInUp 1.2s ease forwards;
+    transform: translateY(50px);
+    animation: fadeUp 1.5s ease forwards;
   }
-
   header h1 {
-    font-size: 3rem;
-    font-weight: 800;
+    font-size: 3.2rem;
     background: linear-gradient(90deg, var(--blue), var(--orange));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-weight: 800;
     letter-spacing: 1px;
     margin: 0;
   }
   header p {
+    margin-top: 12px;
     color: var(--muted);
-    font-size: 1.1rem;
-    margin-top: 10px;
+    font-size: 1.2rem;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ---- Section ---- */
+  /* ==== Section ==== */
   section {
-    max-width: 850px;
-    margin: 70px auto;
+    max-width: 880px;
+    margin: 100px auto;
     background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-    padding: 50px 60px;
+    border-radius: 24px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.05);
+    padding: 70px 70px;
     position: relative;
     overflow: hidden;
+    transform: translateY(80px) scale(0.98);
     opacity: 0;
-    transform: translateY(60px) scale(0.98);
-    transition: all 1s cubic-bezier(0.19,1,0.22,1);
+    transition: all 1.2s cubic-bezier(0.19,1,0.22,1);
   }
   section.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
-    box-shadow: 0 12px 50px rgba(46,169,255,0.15);
+    box-shadow: 0 15px 70px rgba(46,169,255,0.18);
   }
 
+  /* Shimmer highlight */
   section::before {
     content: "";
     position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
+    top: 0; left: -120%;
+    width: 120%; height: 100%;
     background: linear-gradient(90deg, transparent, rgba(46,169,255,0.1), transparent);
     transform: skewX(-20deg);
   }
   section.visible::before {
-    animation: shimmer 2s ease-out forwards;
+    animation: shimmer 1.8s ease-out forwards;
   }
   @keyframes shimmer {
-    to { left: 120%; }
+    to { left: 150%; }
   }
 
   section h2 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: var(--blue);
     border-left: 4px solid var(--orange);
     padding-left: 14px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
 
   ul {
     list-style: none;
-    padding-left: 24px;
+    padding-left: 28px;
     margin: 0;
   }
-
   ul li {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     line-height: 1.7;
+    color: var(--ink);
     position: relative;
-    color: #1c2734;
+    font-size: 1.05rem;
   }
-
   ul li::before {
     content: "▹";
     position: absolute;
@@ -128,34 +146,25 @@
     font-weight: bold;
   }
 
-  /* ---- Animation ---- */
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
+  /* ==== Parallax Scroll effect ==== */
+  .parallax {
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 1s ease;
+  }
+  .parallax.visible {
+    transform: translateY(0);
+    opacity: 1;
   }
 
-  /* ---- Footer ---- */
+  /* ==== Footer ==== */
   footer {
     text-align: center;
-    padding: 70px 20px 60px;
+    padding: 90px 20px 60px;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 
-  /* ---- Floating circles (AI feel) ---- */
-  .orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.25;
-    z-index: -1;
-    animation: float 12s ease-in-out infinite;
-  }
-  .orb.one { width: 300px; height: 300px; top: 10%; left: 5%; background: var(--blue);}
-  .orb.two { width: 250px; height: 250px; bottom: 15%; right: 8%; background: var(--orange);}
-  @keyframes float {
-    0%,100% { transform: translateY(0) scale(1);}
-    50% { transform: translateY(40px) scale(1.1);}
-  }
 </style>
 </head>
 
@@ -165,12 +174,12 @@
 <div class="orb two"></div>
 
 <header>
-  <h1>AI WIZ KIDS — AGENDA 11·11·2025</h1>
+  <h1>AI Wiz Kids Agenda 11·11·2025</h1>
   <p>Chốt giáo trình · Nền tảng triển khai · Kế hoạch gom lớp</p>
 </header>
 
 <section>
-  <h2>1. MỤC TIÊU CUỘC HỌP</h2>
+  <h2>1. Mục tiêu cuộc họp</h2>
   <ul>
     <li>Hoàn thiện khung giáo trình 10 buổi để có thể dạy ngay.</li>
     <li>Xác định nền tảng triển khai giai đoạn 1 (dạy, tài liệu, phụ huynh, quản trị).</li>
@@ -179,22 +188,22 @@
 </section>
 
 <section>
-  <h2>2. NỘI DUNG CHÍNH</h2>
+  <h2>2. Nội dung chính</h2>
   <ul>
-    <li><b>2.1. Giáo trình:</b> Rà soát “Learning Goals”, thống nhất 10 buổi, phân công hoàn thiện nội dung.</li>
-    <li><b>2.2. Nền tảng triển khai:</b> Chọn hình thức dạy (Zoom / awk.edu.vn), xác định các nền tảng hỗ trợ và ưu tiên triển khai.</li>
-    <li><b>2.3. Kế hoạch sale và gom lớp:</b> Mục tiêu số lớp, giá, truyền thông, phân công nhiệm vụ.</li>
-    <li><b>2.4. Phân công & mốc hành động:</b> Tổng hợp đầu việc, người phụ trách, deadline.</li>
+    <li><b>2.1 Giáo trình:</b> Rà soát “Learning Goals”, thống nhất 10 buổi, phân công hoàn thiện nội dung.</li>
+    <li><b>2.2 Nền tảng triển khai:</b> Chọn hình thức dạy (Zoom hoặc awk.edu.vn), xác định các nền tảng hỗ trợ và ưu tiên triển khai.</li>
+    <li><b>2.3 Kế hoạch sale và gom lớp:</b> Mục tiêu số lớp, giá, truyền thông, phân công nhiệm vụ.</li>
+    <li><b>2.4 Phân công và mốc hành động:</b> Tổng hợp đầu việc, người phụ trách, thời hạn hoàn thành.</li>
   </ul>
 </section>
 
 <section>
-  <h2>3. KẾT QUẢ MONG ĐỢI</h2>
+  <h2>3. Kết quả mong đợi</h2>
   <ul>
     <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy.</li>
     <li>Danh sách nền tảng cần triển khai theo thứ tự ưu tiên.</li>
     <li>Kế hoạch mở lớp pilot đầu tiên.</li>
-    <li>Phân công công việc rõ ràng và thời hạn cụ thể.</li>
+    <li>Phân công công việc rõ ràng, có mốc tiến độ cụ thể.</li>
   </ul>
 </section>
 
@@ -203,17 +212,16 @@
 </footer>
 
 <script>
-  // Scroll reveal effect
   const sections = document.querySelectorAll('section');
-  const reveal = () => {
-    const trigger = window.innerHeight * 0.85;
-    sections.forEach(s => {
-      const top = s.getBoundingClientRect().top;
-      if (top < trigger) s.classList.add('visible');
+  const revealOnScroll = () => {
+    const trigger = window.innerHeight * 0.8;
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if (top < trigger) sec.classList.add('visible');
     });
   };
-  window.addEventListener('scroll', reveal);
-  window.addEventListener('load', reveal);
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
 </script>
 
 </body>
