@@ -8,194 +8,173 @@
 <style>
 :root {
   --blue: #2EA9FF;
-  --aqua: #00C4FF;
   --orange: #FFB347;
-  --gold: #FFD074;
   --ink: #0A0F1C;
   --muted: #5C6F82;
   --bg: #F7FAFF;
 }
 
-/* RESET & BASE */
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+/* ====== BASE ====== */
+*{box-sizing:border-box;}
+html,body{
+  margin:0;padding:0;
+  font-family:"Inter",system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;
+  scroll-behavior:smooth;
 }
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: "Inter", system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--ink);
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:radial-gradient(circle at 30% 30%,rgba(46,169,255,.15),transparent 60%),
+             radial-gradient(circle at 70% 70%,rgba(255,179,71,.15),transparent 60%);
+  background-size:200% 200%;
+  animation:bgmove 14s ease-in-out infinite alternate;
+  z-index:-1;
+}
+@keyframes bgmove{0%{background-position:0% 0%}100%{background-position:100% 100%}}
+
+/* ====== HEADER META ====== */
+.meta{
+  position:fixed;top:0;width:100%;
+  background:rgba(255,255,255,.8);
+  backdrop-filter:blur(8px);
+  font-size:.85rem;
+  color:var(--ink);
+  text-align:center;
+  padding:8px 12px;
+  border-bottom:1px solid rgba(0,0,0,.05);
+  z-index:10;
 }
 
-/* ==== BACKGROUND EFFECT ==== */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 30% 30%, rgba(46,169,255,0.15), transparent 60%),
-              radial-gradient(circle at 70% 70%, rgba(255,179,71,0.15), transparent 60%);
-  background-size: 200% 200%;
-  animation: bgmove 12s ease-in-out infinite alternate;
-  z-index: -2;
+/* ====== HEADER ====== */
+header{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:18vh 5vw 10vh;
+  position:relative;
 }
-@keyframes bgmove {
-  0% {background-position: 0% 0%;}
-  100% {background-position: 100% 100%;}
+header h1{
+  font-size:8vw;
+  font-weight:800;
+  background:linear-gradient(90deg,var(--blue),var(--orange));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin:0.6em 0;
 }
-
-/* ==== HEADER META ==== */
-.meta {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(255,255,255,0.75);
-  backdrop-filter: blur(8px);
-  padding: 8px 12px;
-  font-size: 0.8rem;
-  text-align: center;
-  color: var(--ink);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  z-index: 10;
+#introText{
+  font-family:monospace;
+  font-size:4vw;
+  color:var(--muted);
+  text-align:center;
+  margin-top:2vw;
 }
 
-/* ==== SYSTEM STATUS ==== */
-.system-log {
-  background: rgba(0,0,0,0.04);
-  color: #334;
-  font-family: monospace;
-  font-size: 0.8rem;
-  padding: 12px 16px;
-  margin: 2vh 5vw;
-  border-left: 3px solid var(--blue);
-  border-radius: 6px;
-  line-height: 1.6;
-  box-shadow: 0 0 15px rgba(46,169,255,0.05);
+/* ====== SECTIONS ====== */
+section{
+  min-height:100vh;
+  padding:20vh 8vw 12vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  scroll-snap-align:start;
+  opacity:1;
 }
-.system-log strong { color: var(--blue); }
-.system-log span.warn { color: var(--orange); font-weight: 600; }
-.system-log span.ok { color: #00A86B; font-weight: 600; }
-
-.confidential {
-  position: fixed;
-  bottom: 10px;
-  right: 12px;
-  font-size: 0.8rem;
-  color: var(--muted);
-  opacity: 0.7;
-  z-index: 5;
+h2{
+  font-size:6vw;
+  color:var(--blue);
+  text-align:center;
+  margin-bottom:5vw;
 }
-
-/* ==== SECTION ==== */
-section {
-  min-height: 100vh;
-  padding: 18vh 8vw 12vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  scroll-snap-align: start;
-  opacity: 0;
-  transform: translateY(60px);
-  transition: all 1.2s cubic-bezier(0.19,1,0.22,1);
+ul{list-style:none;padding:0;margin:0 auto;max-width:90%;}
+ul li{
+  font-size:4.2vw;
+  line-height:1.6;
+  margin-bottom:3vw;
+  position:relative;
 }
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
+ul li::before{
+  content:"▹";
+  color:var(--orange);
+  position:absolute;
+  left:-5vw;
 }
 
-/* ==== TYPO ==== */
-h1 {
-  font-size: 8vw;
-  text-align: center;
-  background: linear-gradient(90deg, var(--blue), var(--orange));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 6vw;
-  font-weight: 800;
+/* ====== SYSTEM LOG ====== */
+.system-log{
+  background:rgba(0,0,0,.04);
+  font-family:monospace;
+  font-size:3.5vw;
+  padding:12px 16px;
+  margin:2vh 5vw;
+  border-left:3px solid var(--blue);
+  border-radius:6px;
+  line-height:1.6;
+  box-shadow:0 0 15px rgba(46,169,255,.05);
+  color:#334;
 }
-h2 {
-  font-size: 6vw;
-  color: var(--blue);
-  text-align: center;
-  margin-bottom: 5vw;
+.system-log strong{color:var(--blue);}
+.system-log span.warn{color:var(--orange);font-weight:600;}
+.system-log span.ok{color:#00A86B;font-weight:600;}
+
+/* ====== AI SUGGEST BOX ====== */
+.ai-suggestion{
+  border:2px dashed var(--blue);
+  border-radius:10px;
+  background:rgba(255,255,255,0.6);
+  padding:6vw;
+  margin:10vw 5vw;
+  box-shadow:0 6px 20px rgba(0,0,0,0.05);
 }
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 90%;
+.ai-suggestion h3{
+  text-align:center;
+  font-size:5vw;
+  background:linear-gradient(90deg,var(--blue),var(--orange));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:3vw;
 }
-ul li {
-  font-size: 4.2vw;
-  line-height: 1.6;
-  margin-bottom: 3vw;
-  position: relative;
-}
-ul li::before {
-  content: "▹";
-  color: var(--orange);
-  position: absolute;
-  left: -5vw;
-}
-p {
-  color: var(--muted);
-  text-align: center;
-  font-size: 3.8vw;
-  margin-top: 5vw;
+.ai-suggestion p{
+  font-size:3.8vw;
+  color:var(--muted);
+  line-height:1.7;
 }
 
-/* ==== CTA ==== */
-.cta {
-  text-align: center;
-  margin-top: 12vw;
+/* ====== CTA ====== */
+.cta{text-align:center;margin-top:10vw;}
+.cta a{
+  background:linear-gradient(90deg,var(--blue),var(--orange));
+  color:#fff;
+  padding:4vw 8vw;
+  border-radius:30px;
+  font-size:4vw;
+  text-decoration:none;
+  font-weight:600;
+  box-shadow:0 6px 20px rgba(46,169,255,.25);
+  transition:.4s ease;
 }
-.cta a {
-  background: linear-gradient(90deg, var(--blue), var(--orange));
-  color: #fff;
-  padding: 4vw 8vw;
-  border-radius: 30px;
-  font-size: 4vw;
-  text-decoration: none;
-  font-weight: 600;
-  box-shadow: 0 6px 20px rgba(46,169,255,0.25);
-  transition: all 0.4s ease;
+.cta a:hover{transform:scale(1.05);}
+
+/* ====== FOOTER ====== */
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:3.5vw;
+  padding:8vw 4vw;
 }
-.cta a:active {
-  transform: scale(0.97);
+.confidential{
+  position:fixed;bottom:10px;right:12px;
+  font-size:.8rem;color:var(--muted);
+  opacity:.7;z-index:5;
 }
 
-/* ==== INTRO TYPE ==== */
-#introText {
-  font-family: monospace;
-  font-size: 4vw;
-  color: var(--muted);
-  border-right: 3px solid var(--orange);
-  white-space: nowrap;
-  overflow: hidden;
-  width: 0;
-  animation: typing 3s steps(40, end) forwards, blink 0.8s infinite;
-  margin-top: 3vw;
-  text-align: center;
-}
-@keyframes typing { to { width: 28ch; } }
-@keyframes blink { 50% { border-color: transparent; } }
-
-/* ==== FOOTER ==== */
-footer {
-  text-align: center;
-  color: var(--muted);
-  font-size: 3.5vw;
-  padding: 8vw 4vw;
-}
-
-/* SCROLL SNAP CONTAINER */
-html {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-}
+/* ====== SCROLL SNAP ====== */
+html{scroll-snap-type:y mandatory;overflow-y:scroll;}
 </style>
 </head>
 
@@ -205,98 +184,72 @@ html {
   Người yêu cầu: <b>Lữ Minh Trí</b> — Yêu cầu từ <b>Hyper Bot</b> — Người viết: <b>AI AWK Assistant</b> — Giờ: <b>10:53 · 10/11/2025</b> — <b>Xuất bản tự động</b>
 </div>
 
+<header>
+  <h1>AWK PROJECT</h1>
+  <h1>AGENDA 11·11·2025</h1>
+  <h1>INTERNAL BRIEFING</h1>
+  <div id="introText">AI AWK Assistant đã khởi động thành công — hệ thống hoạt động ổn định.</div>
+</header>
+
 <section id="s1">
-  <h1>AWK PROJECT — AGENDA</h1>
-  <div id="introText">Đang khởi động AI AWK Assistant ...</div>
-
-  <div class="system-log">
-    <strong>🧠 System Log:</strong><br>
-    • Đang tải dữ liệu tổng hợp từ <span class="ok">76 tệp dự án</span> và <span class="ok">~2000 đoạn thảo luận</span>.<br>
-    • <span class="ok">AI Parser:</span> Phân tích ngữ nghĩa, gom nhóm chủ đề, tái cấu trúc nội dung học tập.<br>
-    • <span class="warn">Lưu ý:</span> Nếu phát hiện key sai hoặc mismatch dữ liệu, vui lòng yêu cầu chỉnh sửa ở <b>ROOT CONFIG</b>.<br>
-    • Trạng thái hệ thống: <span class="ok">Ổn định — Active</span>
-  </div>
-</section>
-
-<section id="s2">
   <h2>1. Mục tiêu</h2>
   <ul>
     <li>Hoàn thiện 10/88 buổi demo (Level 1–2) để gom lớp và test đầu vào.</li>
     <li>Xây dựng nền tảng triển khai: dạy, phụ huynh, showcase, quản trị.</li>
     <li>Chuẩn hóa quy trình giảng dạy và training nội bộ.</li>
   </ul>
+  <div class="system-log">
+    <strong>🧠 System Log:</strong><br>
+    Dữ liệu được tổng hợp từ <span class="ok">76 file dự án</span> và <span class="ok">2000 đoạn thảo luận</span>.<br>
+    Nếu phát hiện key sai, hãy yêu cầu chỉnh ở <b>ROOT CONFIG</b>.<br>
+    Trạng thái hệ thống: <span class="ok">ONLINE</span>
+  </div>
 </section>
 
-<section id="s3">
+<section id="s2">
   <h2>2. Nội dung chính</h2>
   <ul>
     <li><b>Giáo trình:</b> Chuẩn hóa 10 buổi đầu, xây khung đánh giá học viên.</li>
     <li><b>Nền tảng:</b> Zoom → awk.edu.vn, tích hợp dashboard và kho tài liệu.</li>
     <li><b>Gom lớp:</b> Tổ chức 3 lớp pilot đầu tiên (8–10 học viên/lớp).</li>
-    <li><b>Vận hành:</b> Chốt người phụ trách, deadline, tài liệu nội bộ.</li>
+    <li><b>Vận hành:</b> Chốt người phụ trách, deadline và tài liệu nội bộ.</li>
   </ul>
-  <div class="system-log">
-    <strong>📊 Data Insight:</strong><br>
-    • Mức độ hoàn thiện giáo trình hiện tại: <span class="ok">65%</span><br>
-    • Thời gian triển khai dự kiến: <span class="ok">2 tuần</span><br>
-    • Đề xuất bổ sung: slide tương tác cho nhóm 4–7 tuổi.
-  </div>
 </section>
 
-<section id="s4">
+<section id="s3">
   <h2>3. Kết quả mong đợi</h2>
   <ul>
     <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy.</li>
-    <li>Kế hoạch mở lớp pilot và thu dữ liệu học viên thực tế.</li>
-    <li>Danh sách nền tảng triển khai theo thứ tự ưu tiên.</li>
+    <li>Kế hoạch mở lớp pilot và thu dữ liệu thực tế.</li>
+    <li>Danh sách nền tảng triển khai theo ưu tiên.</li>
   </ul>
-  <div class="system-log">
-    <strong>✅ Validation Layer:</strong><br>
-    • Tất cả modules pilot được kiểm tra bởi <span class="ok">Hyper One QA Bot</span>.<br>
-    • Kết quả tương thích hệ thống: <span class="ok">100%</span>.<br>
-    • Không phát hiện lỗi dữ liệu nghiêm trọng.
-  </div>
 </section>
 
-<section id="s5">
+<section id="s4">
   <h2>4. Hướng phát triển kế tiếp</h2>
   <ul>
     <li>Hoàn thiện toàn bộ 88 buổi Level 1–2 sau khi test xong.</li>
-    <li>Chốt Level 2 (Cốt lõi): Tư duy AI Logic và sáng tạo.</li>
+    <li>Chốt Level 2 (Cốt lõi): Tư duy AI Logic và Sáng tạo.</li>
     <li>Tích hợp hệ thống showcase học sinh & phụ huynh.</li>
     <li>Chuẩn bị sự kiện “AI Wiz Kids Exhibition”.</li>
   </ul>
   <div class="cta">
     <a href="https://awk.edu.vn" target="_blank">↗ Về trang chủ awk.edu.vn</a>
   </div>
-  <div class="system-log">
-    <strong>🔗 System Sync:</strong><br>
-    • Phiên bản giáo trình: <span class="ok">v1.0.7</span><br>
-    • Lần cập nhật gần nhất: <span class="ok">10/11/2025 – 10:53</span><br>
-    • Đồng bộ thành công với nền tảng <b>awk.edu.vn/core</b>
-  </div>
+</section>
+
+<section class="ai-suggestion">
+  <h3>Gợi ý từ AI AWK Assistant</h3>
+  <p>1️⃣ Tạo một video demo ngắn về 1 buổi học Level 1 để phụ huynh hiểu cách học.<br>
+     2️⃣ Xây “AI Kids Wall” – bảng vinh danh sản phẩm AI đầu tiên của trẻ.<br>
+     3️⃣ Thiết lập dashboard theo thời gian thực để đội ngũ theo dõi tiến độ và chất lượng giảng dạy.</p>
 </section>
 
 <footer>
-  © 2025 AWK Project — Hyper One  
-  <br>TÀI LIỆU NỘI BỘ — CONFIDENTIAL
+  © 2025 AWK Project — Hyper One <br>
+  TÀI LIỆU NỘI BỘ — CONFIDENTIAL
 </footer>
 
 <div class="confidential">AI AWK Assistant Active</div>
-
-<script>
-// Reveal animation khi cuộn
-const sections = document.querySelectorAll("section");
-const reveal = () => {
-  const trigger = window.innerHeight * 0.85;
-  sections.forEach(sec => {
-    const top = sec.getBoundingClientRect().top;
-    if (top < trigger) sec.classList.add("visible");
-  });
-};
-window.addEventListener("scroll", reveal);
-window.addEventListener("load", reveal);
-</script>
-
 </body>
 </html>
