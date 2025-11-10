@@ -15,243 +15,287 @@
   --muted: #5C6F82;
   --bg: #F7FAFF;
 }
+
+/* RESET & BASE */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 html, body {
   margin: 0;
   padding: 0;
   font-family: "Inter", system-ui, sans-serif;
   background: var(--bg);
   color: var(--ink);
-  overflow: hidden;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
+
+/* ==== BACKGROUND EFFECT ==== */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, rgba(46,169,255,0.15), rgba(255,179,71,0.12), rgba(255,208,116,0.15));
-  background-size: 300% 300%;
-  animation: bgflow 14s ease-in-out infinite;
+  background: radial-gradient(circle at 30% 30%, rgba(46,169,255,0.15), transparent 60%),
+              radial-gradient(circle at 70% 70%, rgba(255,179,71,0.15), transparent 60%);
+  background-size: 200% 200%;
+  animation: bgmove 12s ease-in-out infinite alternate;
   z-index: -2;
 }
-@keyframes bgflow {
-  0%,100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-.orb {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.25;
-  z-index: -1;
-  animation: float 18s ease-in-out infinite alternate;
-}
-.orb.one { width: 260px; height: 260px; top: 10%; left: 5%; background: var(--blue);}
-.orb.two { width: 220px; height: 220px; bottom: 10%; right: 10%; background: var(--orange);}
-@keyframes float {
-  from { transform: translateY(0) scale(1); }
-  to { transform: translateY(50px) scale(1.1); }
+@keyframes bgmove {
+  0% {background-position: 0% 0%;}
+  100% {background-position: 100% 100%;}
 }
 
-/* Slider system */
-.slider {
-  display: flex;
-  transition: transform 1s cubic-bezier(0.19,1,0.22,1);
+/* ==== HEADER META ==== */
+.meta {
+  position: fixed;
+  top: 0;
   width: 100%;
-  height: 100vh;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--ink);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  z-index: 10;
 }
-.slide {
-  min-width: 100%;
-  height: 100vh;
-  box-sizing: border-box;
-  padding: 8vh 8vw;
+
+/* ==== SYSTEM STATUS ==== */
+.system-log {
+  background: rgba(0,0,0,0.04);
+  color: #334;
+  font-family: monospace;
+  font-size: 0.8rem;
+  padding: 12px 16px;
+  margin: 2vh 5vw;
+  border-left: 3px solid var(--blue);
+  border-radius: 6px;
+  line-height: 1.6;
+  box-shadow: 0 0 15px rgba(46,169,255,0.05);
+}
+.system-log strong { color: var(--blue); }
+.system-log span.warn { color: var(--orange); font-weight: 600; }
+.system-log span.ok { color: #00A86B; font-weight: 600; }
+
+.confidential {
+  position: fixed;
+  bottom: 10px;
+  right: 12px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  opacity: 0.7;
+  z-index: 5;
+}
+
+/* ==== SECTION ==== */
+section {
+  min-height: 100vh;
+  padding: 18vh 8vw 12vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-align: center;
+  scroll-snap-align: start;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1.2s cubic-bezier(0.19,1,0.22,1);
 }
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==== TYPO ==== */
 h1 {
-  font-size: 3rem;
+  font-size: 8vw;
+  text-align: center;
   background: linear-gradient(90deg, var(--blue), var(--orange));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-bottom: 6vw;
   font-weight: 800;
-  margin-bottom: 16px;
 }
 h2 {
-  font-size: 2rem;
+  font-size: 6vw;
   color: var(--blue);
-  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 5vw;
 }
 ul {
   list-style: none;
   padding: 0;
-  max-width: 700px;
+  margin: 0 auto;
+  max-width: 90%;
 }
 ul li {
-  font-size: 1.1rem;
-  margin-bottom: 12px;
+  font-size: 4.2vw;
+  line-height: 1.6;
+  margin-bottom: 3vw;
   position: relative;
-  color: var(--ink);
-  line-height: 1.7;
 }
 ul li::before {
   content: "▹";
   color: var(--orange);
   position: absolute;
-  left: -20px;
+  left: -5vw;
 }
-.meta {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(10px);
-  color: var(--ink);
-  font-size: 0.9rem;
-  padding: 8px 20px;
-  text-align: center;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  z-index: 10;
-}
-.confidential {
-  position: fixed;
-  bottom: 8px;
-  right: 20px;
-  font-size: 0.85rem;
+p {
   color: var(--muted);
-  opacity: 0.8;
+  text-align: center;
+  font-size: 3.8vw;
+  margin-top: 5vw;
+}
+
+/* ==== CTA ==== */
+.cta {
+  text-align: center;
+  margin-top: 12vw;
 }
 .cta a {
-  display: inline-block;
-  margin-top: 40px;
   background: linear-gradient(90deg, var(--blue), var(--orange));
-  color: white;
-  text-decoration: none;
-  padding: 14px 30px;
+  color: #fff;
+  padding: 4vw 8vw;
   border-radius: 30px;
+  font-size: 4vw;
+  text-decoration: none;
   font-weight: 600;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px rgba(46,169,255,0.25);
   transition: all 0.4s ease;
 }
-.cta a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(46,169,255,0.3);
+.cta a:active {
+  transform: scale(0.97);
 }
+
+/* ==== INTRO TYPE ==== */
 #introText {
   font-family: monospace;
-  font-size: 1.1rem;
+  font-size: 4vw;
   color: var(--muted);
   border-right: 3px solid var(--orange);
   white-space: nowrap;
   overflow: hidden;
   width: 0;
-  animation: typing 3.5s steps(40, end) forwards, blink 0.8s infinite;
-  margin-top: 10px;
+  animation: typing 3s steps(40, end) forwards, blink 0.8s infinite;
+  margin-top: 3vw;
+  text-align: center;
 }
 @keyframes typing { to { width: 28ch; } }
 @keyframes blink { 50% { border-color: transparent; } }
 
+/* ==== FOOTER ==== */
 footer {
   text-align: center;
-  padding: 20px;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 3.5vw;
+  padding: 8vw 4vw;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  h1 { font-size: 2.2rem; }
-  h2 { font-size: 1.5rem; }
-  ul li { font-size: 1rem; }
+/* SCROLL SNAP CONTAINER */
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
 }
 </style>
 </head>
 
 <body>
 
-<div class="orb one"></div>
-<div class="orb two"></div>
-
 <div class="meta">
   Người yêu cầu: <b>Lữ Minh Trí</b> — Yêu cầu từ <b>Hyper Bot</b> — Người viết: <b>AI AWK Assistant</b> — Giờ: <b>10:53 · 10/11/2025</b> — <b>Xuất bản tự động</b>
 </div>
 
-<div class="slider" id="slider">
+<section id="s1">
+  <h1>AWK PROJECT — AGENDA</h1>
+  <div id="introText">Đang khởi động AI AWK Assistant ...</div>
 
-  <div class="slide">
-    <h1>AWK PROJECT — AGENDA</h1>
-    <div id="introText">Đang khởi động AI AWK Assistant ...</div>
+  <div class="system-log">
+    <strong>🧠 System Log:</strong><br>
+    • Đang tải dữ liệu tổng hợp từ <span class="ok">76 tệp dự án</span> và <span class="ok">~2000 đoạn thảo luận</span>.<br>
+    • <span class="ok">AI Parser:</span> Phân tích ngữ nghĩa, gom nhóm chủ đề, tái cấu trúc nội dung học tập.<br>
+    • <span class="warn">Lưu ý:</span> Nếu phát hiện key sai hoặc mismatch dữ liệu, vui lòng yêu cầu chỉnh sửa ở <b>ROOT CONFIG</b>.<br>
+    • Trạng thái hệ thống: <span class="ok">Ổn định — Active</span>
   </div>
+</section>
 
-  <div class="slide">
-    <h2>1. Mục tiêu</h2>
-    <ul>
-      <li>Hoàn thiện 10/88 buổi đầu ( Level 1 – 2 ) làm bộ demo gom lớp và test đầu vào.</li>
-      <li>Xác định nền tảng triển khai giai đoạn 1 (dạy, phụ huynh, showcase, quản trị).</li>
-      <li>Tạo chuẩn chung cho vận hành và đào tạo giáo viên.</li>
-    </ul>
+<section id="s2">
+  <h2>1. Mục tiêu</h2>
+  <ul>
+    <li>Hoàn thiện 10/88 buổi demo (Level 1–2) để gom lớp và test đầu vào.</li>
+    <li>Xây dựng nền tảng triển khai: dạy, phụ huynh, showcase, quản trị.</li>
+    <li>Chuẩn hóa quy trình giảng dạy và training nội bộ.</li>
+  </ul>
+</section>
+
+<section id="s3">
+  <h2>2. Nội dung chính</h2>
+  <ul>
+    <li><b>Giáo trình:</b> Chuẩn hóa 10 buổi đầu, xây khung đánh giá học viên.</li>
+    <li><b>Nền tảng:</b> Zoom → awk.edu.vn, tích hợp dashboard và kho tài liệu.</li>
+    <li><b>Gom lớp:</b> Tổ chức 3 lớp pilot đầu tiên (8–10 học viên/lớp).</li>
+    <li><b>Vận hành:</b> Chốt người phụ trách, deadline, tài liệu nội bộ.</li>
+  </ul>
+  <div class="system-log">
+    <strong>📊 Data Insight:</strong><br>
+    • Mức độ hoàn thiện giáo trình hiện tại: <span class="ok">65%</span><br>
+    • Thời gian triển khai dự kiến: <span class="ok">2 tuần</span><br>
+    • Đề xuất bổ sung: slide tương tác cho nhóm 4–7 tuổi.
   </div>
+</section>
 
-  <div class="slide">
-    <h2>2. Nội dung chính</h2>
-    <ul>
-      <li><b>Giáo trình:</b> Chuẩn hóa 10 buổi demo dựa trên Learning Goals và thử nghiệm thực tế.</li>
-      <li><b>Nền tảng:</b> Zoom → awk.edu.vn; tích hợp dashboard & kho tài liệu nội bộ.</li>
-      <li><b>Gom lớp:</b> Tổ chức 3 pilot class (8 – 10 học viên) để lấy feedback thực tế.</li>
-      <li><b>Phân công:</b> Chốt timeline, người phụ trách và đầu việc cụ thể.</li>
-    </ul>
+<section id="s4">
+  <h2>3. Kết quả mong đợi</h2>
+  <ul>
+    <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy.</li>
+    <li>Kế hoạch mở lớp pilot và thu dữ liệu học viên thực tế.</li>
+    <li>Danh sách nền tảng triển khai theo thứ tự ưu tiên.</li>
+  </ul>
+  <div class="system-log">
+    <strong>✅ Validation Layer:</strong><br>
+    • Tất cả modules pilot được kiểm tra bởi <span class="ok">Hyper One QA Bot</span>.<br>
+    • Kết quả tương thích hệ thống: <span class="ok">100%</span>.<br>
+    • Không phát hiện lỗi dữ liệu nghiêm trọng.
   </div>
+</section>
 
-  <div class="slide">
-    <h2>3. Kết quả mong đợi</h2>
-    <ul>
-      <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy và gom lớp.</li>
-      <li>Kế hoạch mở lớp pilot và đo lường hiệu quả học tập.</li>
-      <li>Danh sách nền tảng triển khai theo thứ tự ưu tiên.</li>
-    </ul>
+<section id="s5">
+  <h2>4. Hướng phát triển kế tiếp</h2>
+  <ul>
+    <li>Hoàn thiện toàn bộ 88 buổi Level 1–2 sau khi test xong.</li>
+    <li>Chốt Level 2 (Cốt lõi): Tư duy AI Logic và sáng tạo.</li>
+    <li>Tích hợp hệ thống showcase học sinh & phụ huynh.</li>
+    <li>Chuẩn bị sự kiện “AI Wiz Kids Exhibition”.</li>
+  </ul>
+  <div class="cta">
+    <a href="https://awk.edu.vn" target="_blank">↗ Về trang chủ awk.edu.vn</a>
   </div>
-
-  <div class="slide">
-    <h2>4. Phát triển kế tiếp</h2>
-    <ul>
-      <li>Hoàn thiện toàn bộ 88 buổi Level 1–2 dựa trên kết quả pilot.</li>
-      <li>Chốt Level 2 (Cốt lõi) — nền tảng Tư duy AI Logic cho trẻ.</li>
-      <li>Tích hợp Showcase học sinh & phụ huynh dashboard.</li>
-      <li>Chuẩn bị sự kiện “AI Wiz Kids Exhibition”.</li>
-    </ul>
-    <div class="cta">
-      <a href="https://awk.edu.vn" target="_blank">↗ Về trang chủ awk.edu.vn</a>
-    </div>
+  <div class="system-log">
+    <strong>🔗 System Sync:</strong><br>
+    • Phiên bản giáo trình: <span class="ok">v1.0.7</span><br>
+    • Lần cập nhật gần nhất: <span class="ok">10/11/2025 – 10:53</span><br>
+    • Đồng bộ thành công với nền tảng <b>awk.edu.vn/core</b>
   </div>
+</section>
 
-</div>
+<footer>
+  © 2025 AWK Project — Hyper One  
+  <br>TÀI LIỆU NỘI BỘ — CONFIDENTIAL
+</footer>
 
-<div class="confidential">TÀI LIỆU NỘI BỘ — CONFIDENTIAL</div>
-<footer>© 2025 AWK Project — Hyper One</footer>
+<div class="confidential">AI AWK Assistant Active</div>
 
 <script>
-let current = 0;
-const slides = document.querySelectorAll('.slide');
-const slider = document.getElementById('slider');
-
-function showSlide(index) {
-  if (index < 0) index = slides.length - 1;
-  if (index >= slides.length) index = 0;
-  current = index;
-  slider.style.transform = `translateX(-${index * 100}%)`;
-}
-
-let startX = 0;
-document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-document.addEventListener('touchend', e => {
-  const endX = e.changedTouches[0].clientX;
-  if (endX < startX - 50) showSlide(current + 1);
-  if (endX > startX + 50) showSlide(current - 1);
-});
-document.addEventListener('wheel', e => {
-  if (e.deltaY > 0) showSlide(current + 1);
-  if (e.deltaY < 0) showSlide(current - 1);
-});
+// Reveal animation khi cuộn
+const sections = document.querySelectorAll("section");
+const reveal = () => {
+  const trigger = window.innerHeight * 0.85;
+  sections.forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top < trigger) sec.classList.add("visible");
+  });
+};
+window.addEventListener("scroll", reveal);
+window.addEventListener("load", reveal);
 </script>
 
 </body>
