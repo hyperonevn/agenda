@@ -7,70 +7,112 @@
 
 <style>
   :root {
-    --bg: #05080f;
-    --card: #0e1523;
+    --bg-dark: #030712;
     --ai-blue: #00e0ff;
     --ai-green: #00ffa3;
-    --ink: #ecf3ff;
+    --ink: #f4f8ff;
     --muted: #9bb2cc;
   }
 
   body {
     margin: 0;
     font-family: "Inter", system-ui, sans-serif;
-    background: radial-gradient(circle at top left, #071a2b, #03070e 80%);
+    background: radial-gradient(circle at 30% 20%, #06172a, #030712 90%);
     color: var(--ink);
     overflow-x: hidden;
   }
 
-  /* Nền hiệu ứng chuyển sáng */
+  /* ==== BACKGROUND PULSE ==== */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: linear-gradient(120deg, rgba(0,224,255,0.15), rgba(0,255,163,0.1), rgba(0,0,0,0.4));
-    background-size: 300% 300%;
-    animation: glow 10s ease-in-out infinite;
-    z-index: -1;
+    background: linear-gradient(120deg, rgba(0,224,255,0.2), rgba(0,255,163,0.1), rgba(0,0,0,0.4));
+    background-size: 400% 400%;
+    animation: pulseBg 12s ease infinite;
+    z-index: -2;
   }
 
-  @keyframes glow {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+  @keyframes pulseBg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
+  /* ==== INTRO LOGO ==== */
+  #intro {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-dark);
+    z-index: 1000;
+    animation: introOut 1.2s ease forwards;
+    animation-delay: 2.8s;
+  }
+
+  #intro h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, var(--ai-blue), var(--ai-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: introText 2s ease forwards;
+  }
+
+  @keyframes introText {
+    30% {opacity: 1; transform: scale(1.1);}
+    70% {opacity: 1; transform: scale(1);}
+    100% {opacity: 1;}
+  }
+
+  @keyframes introOut {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  /* ==== HEADER ==== */
   header {
     text-align: center;
-    padding: 80px 20px 40px;
+    padding: 100px 20px 60px;
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 1s ease forwards;
+    animation-delay: 3s;
   }
 
-  header h1 {
+  header h2 {
     font-size: 2.8rem;
     background: linear-gradient(90deg, var(--ai-blue), var(--ai-green));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    letter-spacing: 2px;
   }
-
   header p {
     color: var(--muted);
-    font-size: 1.1rem;
+    margin-top: 10px;
   }
 
+  @keyframes fadeUp {
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  /* ==== SECTION ==== */
   .section {
     max-width: 850px;
     margin: 80px auto;
-    background: rgba(14,21,35,0.7);
+    background: rgba(14,21,35,0.65);
+    border-radius: 18px;
     border: 1px solid rgba(0,224,255,0.2);
-    border-radius: 16px;
-    box-shadow: 0 0 30px rgba(0,224,255,0.1);
+    box-shadow: 0 0 25px rgba(0,224,255,0.1);
     padding: 50px;
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transform: translateY(60px);
-    transition: all 1s ease;
+    transform: translateY(80px);
+    transition: all 1.2s ease;
   }
 
   .section.visible {
@@ -82,104 +124,99 @@
   .section::before {
     content: "";
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(from 0deg, transparent, rgba(0,224,255,0.25), transparent 30%);
-    animation: rotate 8s linear infinite;
-    z-index: 0;
+    top: 0; left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,224,255,0.2), transparent);
+    transform: skewX(-20deg);
+    transition: 1s;
   }
 
-  @keyframes rotate {
-    100% { transform: rotate(360deg); }
+  .section.visible::before {
+    left: 150%;
+    transition: 1.8s ease-out;
   }
 
-  h2 {
+  h3 {
     color: var(--ai-blue);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     border-left: 3px solid var(--ai-green);
     padding-left: 12px;
     margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
   }
 
   ul {
     list-style: none;
     padding-left: 25px;
-    position: relative;
-    z-index: 1;
   }
-
   ul li {
     margin-bottom: 10px;
     line-height: 1.6;
     position: relative;
   }
-
   ul li::before {
     content: "▹";
     color: var(--ai-green);
     position: absolute;
     left: -20px;
-    top: 0;
   }
 
   footer {
     text-align: center;
     color: var(--muted);
-    font-size: 0.9rem;
-    margin-top: 80px;
-    padding-bottom: 50px;
+    margin-top: 100px;
+    padding-bottom: 60px;
   }
 
 </style>
 </head>
-
 <body>
-  <header>
-    <h1>AI WIZ KIDS — AGENDA 11·11·2025</h1>
-    <p>Chốt giáo trình · Nền tảng triển khai · Kế hoạch gom lớp</p>
-  </header>
 
-  <div class="section" id="section1">
-    <h2>1. MỤC TIÊU CUỘC HỌP</h2>
-    <ul>
-      <li>Hoàn thiện khung giáo trình 10 buổi để có thể dạy ngay.</li>
-      <li>Xác định nền tảng triển khai giai đoạn 1 (dạy, tài liệu, phụ huynh, quản trị).</li>
-      <li>Thống nhất kế hoạch gom lớp và chạy khóa đầu tiên.</li>
-    </ul>
-  </div>
+<div id="intro">
+  <h1>AI WIZ KIDS</h1>
+</div>
 
-  <div class="section" id="section2">
-    <h2>2. NỘI DUNG CHÍNH</h2>
-    <ul>
-      <li><b>2.1. Giáo trình:</b> Rà soát “Learning Goals”, thống nhất 10 buổi, phân công hoàn thiện nội dung.</li>
-      <li><b>2.2. Nền tảng triển khai:</b> Chọn hình thức dạy (Zoom / awk.edu.vn), xác định các nền tảng hỗ trợ và ưu tiên triển khai.</li>
-      <li><b>2.3. Kế hoạch sale và gom lớp:</b> Mục tiêu số lớp, giá, truyền thông, phân công nhiệm vụ.</li>
-      <li><b>2.4. Phân công & mốc hành động:</b> Tổng hợp đầu việc, người phụ trách, deadline.</li>
-    </ul>
-  </div>
+<header>
+  <h2>AGENDA 11·11·2025</h2>
+  <p>Chốt giáo trình · Nền tảng triển khai · Kế hoạch gom lớp</p>
+</header>
 
-  <div class="section" id="section3">
-    <h2>3. KẾT QUẢ MONG ĐỢI</h2>
-    <ul>
-      <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy.</li>
-      <li>Danh sách nền tảng cần triển khai theo thứ tự ưu tiên.</li>
-      <li>Kế hoạch mở lớp pilot đầu tiên.</li>
-      <li>Phân công công việc rõ ràng và thời hạn cụ thể.</li>
-    </ul>
-  </div>
+<section class="section">
+  <h3>1. MỤC TIÊU CUỘC HỌP</h3>
+  <ul>
+    <li>Hoàn thiện khung giáo trình 10 buổi để có thể dạy ngay.</li>
+    <li>Xác định nền tảng triển khai giai đoạn 1 (dạy, tài liệu, phụ huynh, quản trị).</li>
+    <li>Thống nhất kế hoạch gom lớp và chạy khóa đầu tiên.</li>
+  </ul>
+</section>
 
-  <footer>
-    © 2025 AI Wiz Kids — Powered by Hyper One
-  </footer>
+<section class="section">
+  <h3>2. NỘI DUNG CHÍNH</h3>
+  <ul>
+    <li><b>2.1. Giáo trình:</b> Rà soát “Learning Goals”, thống nhất 10 buổi, phân công hoàn thiện nội dung.</li>
+    <li><b>2.2. Nền tảng triển khai:</b> Chọn hình thức dạy (Zoom / awk.edu.vn), xác định các nền tảng hỗ trợ và ưu tiên triển khai.</li>
+    <li><b>2.3. Kế hoạch sale và gom lớp:</b> Mục tiêu số lớp, giá, truyền thông, phân công nhiệm vụ.</li>
+    <li><b>2.4. Phân công & mốc hành động:</b> Tổng hợp đầu việc, người phụ trách, deadline.</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h3>3. KẾT QUẢ MONG ĐỢI</h3>
+  <ul>
+    <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy.</li>
+    <li>Danh sách nền tảng cần triển khai theo thứ tự ưu tiên.</li>
+    <li>Kế hoạch mở lớp pilot đầu tiên.</li>
+    <li>Phân công công việc rõ ràng và thời hạn cụ thể.</li>
+  </ul>
+</section>
+
+<footer>
+  © 2025 AI Wiz Kids — Powered by Hyper One
+</footer>
 
 <script>
-  // Hiệu ứng xuất hiện khi cuộn
+  // Reveal sections on scroll
   const sections = document.querySelectorAll('.section');
-
   const revealOnScroll = () => {
     const trigger = window.innerHeight * 0.85;
     sections.forEach(sec => {
@@ -187,9 +224,9 @@
       if (top < trigger) sec.classList.add('visible');
     });
   };
-
   window.addEventListener('scroll', revealOnScroll);
   window.addEventListener('load', revealOnScroll);
 </script>
+
 </body>
 </html>
