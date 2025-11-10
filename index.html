@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AWK Project — AGENDA | AI Core Edition v5.2</title>
+<title>AWK Project — AGENDA | AI Core Edition v5.3</title>
 
 <style>
 :root {
@@ -66,32 +66,47 @@ header{
   background:radial-gradient(circle at center, rgba(240,247,255,0.9) 0%, rgba(255,255,255,1) 100%);
 }
 
-/* 🔵 MINI AI CORE – giống lõi GPT (nhỏ, tinh tế, ánh sáng nhẹ) */
+/* 🔵 AI CORE – Hyper Active mode */
 .ai-core{
   position:absolute;
   top:50%;left:50%;
   transform:translate(-50%,-50%);
-  width:180px;height:180px;
+  width:220px;height:220px;
   border-radius:50%;
   background:
-    radial-gradient(circle at 50% 50%, rgba(46,169,255,0.95) 0%, rgba(46,169,255,0.6) 35%, rgba(255,179,71,0.2) 65%, transparent 90%);
+    radial-gradient(circle at 50% 50%, rgba(46,169,255,1) 0%, rgba(46,169,255,0.65) 40%, rgba(255,179,71,0.3) 70%, transparent 90%);
   box-shadow:
-    0 0 25px 10px rgba(46,169,255,0.5),
-    0 0 60px 30px rgba(46,169,255,0.3),
-    0 0 120px 50px rgba(255,179,71,0.25);
-  filter:blur(15px);
-  animation:corePulse 6s ease-in-out infinite, coreGlow 10s linear infinite;
-  opacity:0.95;
+    0 0 40px 15px rgba(46,169,255,0.65),
+    0 0 100px 45px rgba(46,169,255,0.45),
+    0 0 200px 80px rgba(255,179,71,0.35);
+  filter:blur(18px);
+  animation:corePulse 4s ease-in-out infinite, coreGlow 8s linear infinite;
+  opacity:0.98;
   z-index:1;
 }
 @keyframes corePulse{
   0%,100%{transform:translate(-50%,-50%) scale(1);}
-  50%{transform:translate(-50%,-50%) scale(1.15);}
+  50%{transform:translate(-50%,-50%) scale(1.35);}
 }
 @keyframes coreGlow{
-  0%{box-shadow:0 0 25px 10px rgba(46,169,255,0.5),0 0 60px 30px rgba(46,169,255,0.3),0 0 120px 50px rgba(255,179,71,0.25);}
-  50%{box-shadow:0 0 35px 15px rgba(46,169,255,0.65),0 0 80px 40px rgba(46,169,255,0.4),0 0 140px 60px rgba(255,179,71,0.3);}
-  100%{box-shadow:0 0 25px 10px rgba(46,169,255,0.5),0 0 60px 30px rgba(46,169,255,0.3),0 0 120px 50px rgba(255,179,71,0.25);}
+  0%{box-shadow:0 0 40px 15px rgba(46,169,255,0.65),0 0 100px 45px rgba(46,169,255,0.45),0 0 200px 80px rgba(255,179,71,0.35);}
+  50%{box-shadow:0 0 70px 30px rgba(46,169,255,0.8),0 0 150px 60px rgba(46,169,255,0.55),0 0 280px 120px rgba(255,179,71,0.45);}
+  100%{box-shadow:0 0 40px 15px rgba(46,169,255,0.65),0 0 100px 45px rgba(46,169,255,0.45),0 0 200px 80px rgba(255,179,71,0.35);}
+}
+
+/* ORBIT GLOW – vòng quỹ đạo nhẹ quay quanh lõi */
+.ai-core::after{
+  content:"";
+  position:absolute;
+  inset:-40px;
+  border-radius:50%;
+  border:2px solid rgba(46,169,255,0.25);
+  animation:orbit 6s linear infinite;
+  filter:blur(3px);
+}
+@keyframes orbit{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
 }
 
 /* HEADER TEXT */
@@ -206,7 +221,7 @@ footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:8vh 5vw;}
   <div><span>Người yêu cầu:</span> Lữ Minh Trí</div>
   <div><span>Yêu cầu từ:</span> Hyper Bot</div>
   <div><span>Người viết:</span> AI AWK Assistant</div>
-  <div><span>Thời gian:</span> 11:50 · 10/11/2025</div>
+  <div><span>Thời gian:</span> 12:35 · 10/11/2025</div>
   <div><span>Trạng thái:</span> Xuất bản tự động</div>
   <div><span>Điều chỉnh:</span> KHÔNG CAN THIỆP</div>
   <div><span>Độ tin cậy:</span> 92%</div>
