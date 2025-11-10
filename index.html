@@ -36,10 +36,10 @@ body::before{
 /* ===== META HEADER ===== */
 .meta-box{
   position:fixed;top:0;width:100%;
-  background:rgba(255,255,255,0.8);
+  background:rgba(255,255,255,0.85);
   backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(0,0,0,0.05);
-  padding:12px 10px;
+  padding:10px 12px;
   text-align:center;
   z-index:10;
   line-height:1.5;
@@ -49,9 +49,12 @@ body::before{
   color:var(--ink);
 }
 .meta-line span{
-  display:inline-block;
   font-weight:600;
   color:var(--blue);
+  display:inline-block;
+  min-width:110px;
+  text-align:right;
+  margin-right:6px;
 }
 
 /* ===== HEADER ===== */
@@ -93,8 +96,8 @@ hr.neural{
 }
 @keyframes flowline{0%{background-position:0%}100%{background-position:200%}}
 
-/* ===== SECTIONS ===== */
-section{padding:10vh 8vw;scroll-snap-align:start;}
+/* ===== SECTION ===== */
+section{padding:10vh 8vw;}
 h3{
   text-align:center;
   font-size:5vw;
@@ -170,6 +173,8 @@ footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:10vw 5vw;}
   <div class="meta-line"><span>Người viết:</span> AI AWK Assistant</div>
   <div class="meta-line"><span>Thời gian:</span> 10:53 · 10/11/2025</div>
   <div class="meta-line"><span>Trạng thái:</span> Xuất bản tự động</div>
+  <div class="meta-line"><span>Điều chỉnh *:</span> KHÔNG CAN THIỆP</div>
+  <div class="meta-line"><span>Độ tin cậy:</span> 92%</div>
 </div>
 
 <header>
@@ -181,53 +186,56 @@ footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:10vw 5vw;}
 </header>
 
 <section>
-  <h3>Agenda Overview ▸ Strategic Phases</h3>
+  <h3>Agenda Overview ▸ Preparation Phase</h3>
   <div class="phase">
-    <h4>Phase 1: Build & Validate</h4>
-    <p>Hoàn thiện 10/88 buổi đầu tiên của chương trình, tập trung vào tính logic, trực quan và trải nghiệm học tập.  
-    Thiết lập bộ tiêu chuẩn đầu ra cho mỗi nhóm tuổi.  
-    Thực hiện các buổi thử nghiệm thực tế với nhóm học sinh mục tiêu.</p>
+    <h4>Phase 1 — Curriculum Architecture</h4>
+    <p>Xây dựng khung tổng thể giáo trình AWK: cấu trúc theo độ tuổi, mục tiêu học tập và năng lực AI nền tảng.  
+    Đang rà soát 76 Learning Goals từ bản *TK–Learning Goals.xlsx*, gộp thành 10 buổi demo đầu tiên.  
+    Mục tiêu: đảm bảo tính logic, trải nghiệm trực quan và tính liên kết giữa các buổi học.</p>
 
-    <h4>Phase 2: Platform & Parents</h4>
-    <p>Xây dựng nền tảng học tập thống nhất — tạm thời dạy qua Zoom, chuyển dần sang hệ thống awk.edu.vn.  
-    Thiết kế khu vực dành cho phụ huynh: theo dõi tiến độ, phản hồi kết quả, và nhận thông báo học tập.</p>
+    <h4>Phase 2 — Content Development</h4>
+    <p>Viết nội dung từng buổi học: câu chuyện, hoạt động, bài tập và phần tương tác.  
+    Chuẩn hóa format (storyline – logic – hands-on – reflection) để dễ triển khai.  
+    Chuyển dần sang định dạng số hóa: lesson plan, worksheet, file trình chiếu.</p>
 
-    <h4>Phase 3: Operate & Scale</h4>
-    <p>Tổ chức 3 lớp pilot đầu tiên, tối ưu quy trình sale – onboarding – vận hành.  
-    Huấn luyện giáo viên qua hệ thống AWK Internal.  
-    Đo lường mức độ hài lòng và hiệu quả học của học viên sau mỗi buổi học.</p>
+    <h4>Phase 3 — Internal Validation</h4>
+    <p>Rà soát cùng nhóm cố vấn giáo dục và giáo viên thử nghiệm.  
+    Điều chỉnh độ khó, ngôn ngữ, thời lượng và tính thực tiễn của từng buổi học.  
+    Kiểm tra khả năng chuyển đổi sang dạy online và phương pháp học chủ động.</p>
 
-    <h4>Phase 4: Reflect & Upgrade</h4>
-    <p>Tổng hợp phản hồi từ giáo viên và phụ huynh để hiệu chỉnh giáo trình.  
-    Chuẩn hóa toàn bộ 88 buổi, phát triển Level 2 (AI Logic & Sáng tạo).  
-    Chuẩn bị sự kiện <b>AI Wiz Kids Exhibition</b> để giới thiệu kết quả giai đoạn đầu.</p>
+    <h4>Phase 4 — Readiness & Sync</h4>
+    <p>Tổng hợp toàn bộ nội dung, biên tập phiên bản <b>Curriculum v1.0 – 10 buổi mẫu</b>.  
+    Chuẩn bị tài liệu hướng dẫn giảng viên, cấu trúc dạy thử, và quy trình kiểm thử nội bộ.  
+    Chưa triển khai thương mại – giai đoạn này chỉ tập trung vào chất lượng giáo trình và hệ thống đánh giá đầu ra.</p>
   </div>
 </section>
 
 <section>
-  <h3>Insight Layer ▸ System Data</h3>
+  <h3>Insight Layer ▸ Data Log</h3>
   <div class="console">
-    <p>DATA SOURCES   ▸ 76 files analyzed <span class="ok">✓</span></p>
-    <p>DISCUSSIONS    ▸ 2 004 segments parsed <span class="ok">✓</span></p>
-    <p>ACCURACY       ▸ 98.7% semantic alignment</p>
-    <p>ANOMALIES      ▸ 2 minor keys flagged → <span class="warn">pending validation</span></p>
+    <p>CURRICULUM DRAFT  ▸ 60% completed <span class="ok">✓</span></p>
+    <p>FILES MAPPED       ▸ 76 learning goals integrated <span class="ok">✓</span></p>
+    <p>VALIDATION STATUS  ▸ awaiting internal review</p>
+    <p>PLATFORM STATUS    ▸ awk.edu.vn / staging environment active</p>
   </div>
 </section>
 
 <section>
-  <h3>Action Dashboard ▸ AI Recommendations</h3>
+  <h3>AI Recommendations ▸ Next Actions</h3>
   <div class="phase">
-    <p>🧩 Tạo chuỗi video ngắn (1–2 phút) minh họa hoạt động trong lớp — dùng làm công cụ marketing thực chiến.</p>
-    <p>📈 Thiết lập bảng điều khiển dữ liệu học viên theo thời gian thực — phục vụ quản trị và huấn luyện.</p>
-    <p>🎯 Ra mắt “AI Wall” – nền tảng trưng bày sản phẩm học tập và thành tích của học sinh.</p>
+    <p>🧠 Ưu tiên hoàn thiện 10 buổi đầu tiên và định dạng theo chuẩn AWK Digital Lesson.</p>
+    <p>📘 Xây dựng bản hướng dẫn giảng viên (Teaching Manual v1) – tập trung vào cách tương tác cùng AI.</p>
+    <p>🧩 Tạo phiên bản “AI Companion Script” giúp giáo viên mô phỏng hội thoại với AI trong lớp.</p>
+    <p>📈 Sau khi hoàn thiện, trình lên Hyper One để đánh giá và phê duyệt triển khai thử nghiệm.</p>
   </div>
 </section>
 
 <section>
   <h3>System Sync ▸ awk.edu.vn/core</h3>
   <div class="phase">
-    <p>Toàn bộ dữ liệu đã được đồng bộ với nền tảng awk.edu.vn.  
-    Phiên bản hệ thống hiện tại: <b>v1.0.8</b> — xác nhận <span style="color:#00A86B;">STABLE MODE</span>.</p>
+    <p>Tất cả dữ liệu đang được đồng bộ với <b>Hyper One Internal Repository</b>.  
+    Phiên bản hệ thống hiện tại: <b>v0.9 – Pre-Launch</b>.  
+    Trạng thái: <span style="color:#00A86B;">DESIGN IN PROGRESS</span></p>
     <div class="cta">
       <a href="https://awk.edu.vn" target="_blank">↗ Return to Main System</a>
     </div>
