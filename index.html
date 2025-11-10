@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AWK Project — AGENDA | AI Experience Edition v4.0</title>
+<title>AWK Project — AGENDA | AI Experience Edition v4.5</title>
 
 <style>
 :root {
@@ -29,7 +29,7 @@ body::before{
              radial-gradient(circle at 70% 70%,rgba(255,179,71,.12),transparent 60%);
   background-size:200% 200%;
   animation:bgflow 14s ease-in-out infinite alternate;
-  z-index:-1;
+  z-index:-2;
 }
 @keyframes bgflow{0%{background-position:0% 0%}100%{background-position:100% 100%}}
 
@@ -57,9 +57,9 @@ body::before{
   margin-right:6px;
 }
 
-/* ===== HEADER COMPACT LEFT ===== */
+/* ===== HEADER ===== */
 header{
-  height:85vh;
+  height:70vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -69,45 +69,55 @@ header{
   max-width:90%;
   margin:0 auto;
   position:relative;
+  overflow:hidden;
 }
-header .signal{
+
+/* BIG AI ENERGY CORE (center pulse) */
+.ai-core{
   position:absolute;
-  top:12vh;left:5vw;
-  width:40px;height:40px;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:340px;height:340px;
+  background:radial-gradient(circle, rgba(46,169,255,0.8) 0%, rgba(255,179,71,0.3) 40%, transparent 70%);
   border-radius:50%;
-  background:radial-gradient(circle,var(--blue) 0%,transparent 70%);
-  animation:pulse 3s infinite;
-  opacity:.7;
+  filter:blur(80px);
+  opacity:0.7;
+  animation:corePulse 6s ease-in-out infinite;
+  z-index:-1;
 }
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.3);}}
+@keyframes corePulse{
+  0%,100%{transform:translate(-50%,-50%) scale(1);}
+  50%{transform:translate(-50%,-50%) scale(1.3);}
+}
+
 header h1{
-  font-size:7.2vw;
+  font-size:5.5vw;
   font-weight:800;
   background:linear-gradient(90deg,var(--blue),var(--orange));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   letter-spacing:0.03em;
-  margin:2vh 0 1vh 0;
+  margin:1vh 0;
   filter:drop-shadow(0 0 6px rgba(46,169,255,0.25));
 }
 header h2{
-  font-size:4vw;
+  font-size:3.5vw;
   color:var(--muted);
-  margin:0 0 1.5vh 0;
+  margin:0 0 1vh 0;
   font-weight:500;
 }
 header p{
   font-family:monospace;
-  font-size:3.6vw;
+  font-size:3.2vw;
   color:var(--muted);
   line-height:1.5;
   margin:0;
 }
 @media(min-width:768px){
-  header h1{font-size:3vw;}
-  header h2{font-size:1.6vw;}
-  header p{font-size:1.1vw;}
-  header .signal{width:50px;height:50px;}
+  .ai-core{width:420px;height:420px;filter:blur(120px);}
+  header h1{font-size:2.4vw;}
+  header h2{font-size:1.2vw;}
+  header p{font-size:1vw;}
 }
 
 /* ===== SECTIONS ===== */
@@ -192,14 +202,14 @@ footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:8vh 5vw;}
   <div class="meta-line"><span>Người yêu cầu:</span> Lữ Minh Trí</div>
   <div class="meta-line"><span>Yêu cầu từ:</span> Hyper Bot</div>
   <div class="meta-line"><span>Người viết:</span> AI AWK Assistant</div>
-  <div class="meta-line"><span>Thời gian:</span> 10:53 · 10/11/2025</div>
+  <div class="meta-line"><span>Thời gian:</span> 11:50 · 10/11/2025</div>
   <div class="meta-line"><span>Trạng thái:</span> Xuất bản tự động</div>
-  <div class="meta-line"><span>Điều chỉnh *:</span> KHÔNG CAN THIỆP</div>
+  <div class="meta-line"><span>Điều chỉnh:</span> KHÔNG CAN THIỆP</div>
   <div class="meta-line"><span>Độ tin cậy:</span> 92%</div>
 </div>
 
 <header>
-  <div class="signal"></div>
+  <div class="ai-core"></div>
   <h1>AI AWK SYSTEM</h1>
   <h2>AGENDA — 11·11·2025</h2>
   <p>Hyper One Internal Intelligence Module<br>
@@ -210,33 +220,32 @@ footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:8vh 5vw;}
   <h3>Agenda ▸ Immediate Action Framework</h3>
   <div class="phase">
     <h4>Phase 1 — Curriculum Finalization</h4>
-    <p>Hoàn thiện 10 buổi học đầu tiên để có thể dạy ngay.  
-    Chốt khung logic, chủ đề, hoạt động và cấu trúc bài theo thời gian thực.  
-    Nguyên tắc: “Soạn để dạy được”, không chờ hoàn hảo. Sau 1 vòng chạy, hiệu chỉnh theo phản hồi.  
-    <b>Deadline:</b> 12/11 – giáo trình sẵn sàng cho lớp Zoom đầu tiên.</p>
+    <p>Hoàn thiện 10 buổi đầu tiên để bắt đầu dạy ngay.  
+    Chốt nội dung, chủ đề, hoạt động và trải nghiệm học thực tế.  
+    <b>Nguyên tắc:</b> Soạn đủ để dạy – không chờ hoàn hảo. Sau vòng đầu tiên, hiệu chỉnh theo phản hồi.  
+    <b>Deadline:</b> 12/11 – giáo trình phải sẵn sàng.</p>
 
     <h4>Phase 2 — Platform Decision</h4>
-    <p>Ra quyết định chuyển đổi số toàn phần sang <b>awk.edu.vn</b> hoặc tạm thời dạy qua Zoom.  
-    Ưu tiên dạy Zoom nhưng nội dung – tài liệu – phản hồi được số hóa.  
-    <b>Các nền tảng cần triển khai song song:</b><br>
-    – Nền tảng tài liệu dạy.<br>
-    – Nền tảng cho phụ huynh xem tiến độ.<br>
-    – Nền tảng share sản phẩm học sinh.<br>
-    – Dashboard quản trị cho Owner.</p>
+    <p>Chuyển đổi số hẳn sang <b>awk.edu.vn</b> hoặc tạm dạy qua Zoom, đảm bảo toàn bộ tài liệu – bài học – phản hồi đều lưu trên hệ thống.  
+    Các nền tảng cần ưu tiên:  
+    – Tài liệu giảng dạy.  
+    – Phụ huynh theo dõi.  
+    – Share sản phẩm học sinh.  
+    – Dashboard Owner.</p>
 
     <h4>Phase 3 — Sale & Class Formation</h4>
-    <p>Khởi động sale ngay sau khi có khung giáo trình.  
-    Triển khai chiến lược “VỪA CHẠY – VỪA XẾP HÀNG”: có học viên → gom lớp dạy Zoom, không để gián đoạn.  
-    Xây bộ câu hỏi tư vấn phụ huynh & thông điệp sale (focus: trải nghiệm AI thực tế, lớp nhỏ, cá nhân hóa).  
-    <b>Thời gian sale lý thuyết:</b> liên tục; gom lớp khi đủ 8–10 học viên.</p>
+    <p>Kích hoạt sale ngay, không đợi hoàn chỉnh toàn bộ.  
+    <b>Chiến lược:</b> “VỪA CHẠY – VỪA XẾP HÀNG” – có học viên → gom lớp → dạy Zoom.  
+    Chuẩn bị bộ Q&A sale và thông điệp truyền thông (focus: trải nghiệm học AI thực tế, lớp nhỏ, hiệu quả nhanh).  
+    <b>Sale timeline:</b> mở liên tục – gom lớp khi đạt 8–10 học viên.</p>
 
     <h4>Phase 4 — Management System Setup</h4>
-    <p>Xây hệ thống vận hành xung quanh lớp học:  
-    – Kho tài liệu số trên awk.edu.vn.  
-    – Giao diện phụ huynh theo dõi tiến độ.  
-    – “AI Wall”: nơi đăng sản phẩm học sinh.  
-    – Dashboard quản trị: theo dõi, báo cáo, hiệu suất.  
-    Mục tiêu: chuẩn hóa hệ thống để scale sau lớp đầu tiên.</p>
+    <p>Xây dựng nền tảng quản trị toàn diện quanh lớp học:  
+    – Kho tài liệu trên awk.edu.vn.  
+    – Giao diện phụ huynh theo dõi.  
+    – “AI Wall” hiển thị sản phẩm học viên.  
+    – Dashboard quản trị lớp, tiến độ, doanh thu.  
+    Mục tiêu: chuẩn hóa để scale nhanh sau lớp đầu tiên.</p>
   </div>
 </section>
 
@@ -244,9 +253,9 @@ footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:8vh 5vw;}
   <h3>Insight Layer ▸ System Log</h3>
   <div class="console">
     <p>PROJECT STATUS  ▸ On Hold → Reactivate 11/11 <span class="ok">✓</span></p>
-    <p>CURRICULUM     ▸ 10-buổi khung logic – in progress</p>
+    <p>CURRICULUM     ▸ 10 buổi khung logic – in progress</p>
     <p>PLATFORM       ▸ Zoom + awk.edu.vn / pending final check</p>
-    <p>SALES MODE     ▸ READY – waiting activation trigger</p>
+    <p>SALES MODE     ▸ READY — waiting trigger</p>
   </div>
 </section>
 
@@ -254,18 +263,18 @@ footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:8vh 5vw;}
   <h3>AI Recommendations ▸ Push Protocol</h3>
   <div class="phase">
     <p>⚙️ 11/11: Họp chốt nội dung, phân công hoàn thiện từng buổi (1–10).</p>
-    <p>🧩 Sau họp: triển khai dạy Zoom song song upload nội dung lên awk.edu.vn.</p>
-    <p>📈 Kích hoạt sale ngay – chia 3 nhóm: content, sale, CS phụ huynh.<br>
+    <p>🧩 Sau họp: dạy Zoom song song upload nội dung lên awk.edu.vn.</p>
+    <p>📈 Khởi động sale ngay – chia nhóm: content / sale / phụ huynh.  
        Mục tiêu: 3 lớp đầu tiên trước 20/11.</p>
-    <p>🎯 Ưu tiên hoàn thiện nền tảng tài liệu và dashboard trong lúc dạy thử.</p>
+    <p>🎯 Hoàn thiện nền tảng tài liệu & dashboard trong lúc dạy thử.</p>
   </div>
 </section>
 
 <section>
   <h3>System Sync ▸ awk.edu.vn/core</h3>
   <div class="phase" style="text-align:center;">
-    <p>Tất cả dữ liệu đang được đồng bộ với <b>Hyper One Internal Repository</b>.<br>
-    Phiên bản hệ thống: <b>v0.91 — Pre-Launch</b>.<br>
+    <p>Tất cả dữ liệu được đồng bộ với <b>Hyper One Internal Repository</b>.<br>
+    Phiên bản: <b>v0.91 — Pre-Launch</b>.<br>
     Trạng thái: <span style="color:#00A86B;">PUSH MODE ENABLED</span></p>
     <div class="cta">
       <a href="https://awk.edu.vn" target="_blank">↗ Return to Main System</a>
