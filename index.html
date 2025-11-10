@@ -33,22 +33,35 @@ body::before{
 }
 @keyframes bgflow{0%{background-position:0% 0%}100%{background-position:100% 100%}}
 
-.meta{
+/* ===== META HEADER ===== */
+.meta-box{
   position:fixed;top:0;width:100%;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(8px);
-  font-size:.85rem;color:var(--ink);
-  text-align:center;padding:8px 12px;
+  background:rgba(255,255,255,0.8);
+  backdrop-filter:blur(10px);
   border-bottom:1px solid rgba(0,0,0,0.05);
+  padding:12px 10px;
+  text-align:center;
   z-index:10;
+  line-height:1.5;
+}
+.meta-line{
+  font-size:0.9rem;
+  color:var(--ink);
+}
+.meta-line span{
+  display:inline-block;
+  font-weight:600;
+  color:var(--blue);
 }
 
-/* HEADER — AI INITIALIZATION */
+/* ===== HEADER ===== */
 header{
   height:100vh;
-  display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
-  text-align:center;position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
 }
 header .signal{
   width:70px;height:70px;border-radius:50%;
@@ -62,18 +75,15 @@ header h1{
   background:linear-gradient(90deg,var(--blue),var(--orange));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  letter-spacing:.02em;margin:.3em 0;
+  margin:.3em 0;
+  letter-spacing:.02em;
   filter:drop-shadow(0 0 10px rgba(46,169,255,0.2));
 }
 header h2{
-  color:var(--muted);font-size:4.5vw;
-  font-weight:500;margin:0;
-}
-header p{
-  font-family:monospace;
   color:var(--muted);
-  font-size:3.5vw;
-  margin-top:2vh;
+  font-size:4.5vw;
+  font-weight:500;
+  margin:0;
 }
 hr.neural{
   width:60%;max-width:400px;height:2px;
@@ -83,34 +93,39 @@ hr.neural{
 }
 @keyframes flowline{0%{background-position:0%}100%{background-position:200%}}
 
-/* SECTION GENERAL */
-section{
-  padding:12vh 8vw;
-  scroll-snap-align:start;
-}
+/* ===== SECTIONS ===== */
+section{padding:10vh 8vw;scroll-snap-align:start;}
 h3{
   text-align:center;
   font-size:5vw;
   background:linear-gradient(90deg,var(--blue),var(--orange));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  margin-bottom:3vh;
+  margin-bottom:4vh;
+}
+.phase{
+  max-width:780px;
+  margin:0 auto;
+  background:rgba(255,255,255,0.9);
+  border-radius:14px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+  padding:6vw 6vw 8vw;
+  line-height:1.7;
+}
+.phase h4{
+  font-size:4.8vw;
+  color:var(--blue);
+  margin-bottom:2vw;
+  border-left:4px solid var(--orange);
+  padding-left:12px;
+}
+.phase p{
+  font-size:4.1vw;
+  color:var(--ink);
+  margin:2vw 0;
 }
 
-/* AI SUMMARY */
-.ai-summary ul{list-style:none;padding:0;margin:0 auto;max-width:600px;}
-.ai-summary li{
-  margin:1.2em 0;
-  padding:1.2em;
-  background:rgba(255,255,255,0.8);
-  border-left:4px solid var(--blue);
-  border-radius:8px;
-  box-shadow:0 3px 15px rgba(0,0,0,0.05);
-  font-size:4.2vw;
-  line-height:1.6;
-}
-
-/* INSIGHT LAYER */
+/* ===== CONSOLE ===== */
 .console{
   font-family:monospace;
   background:#0a0f1c;
@@ -118,71 +133,43 @@ h3{
   border-radius:10px;
   padding:16px;
   max-width:90%;
-  margin:3vh auto;
+  margin:5vh auto;
   box-shadow:0 0 25px rgba(46,169,255,0.15);
 }
 .console p{margin:.6em 0;font-size:3.8vw;}
 .console .ok{color:#4affb7;}
 .console .warn{color:#ffae4d;}
 
-/* ACTION DASHBOARD */
-.cards{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:5vw;
-  max-width:650px;margin:0 auto;
-}
-.card{
-  background:rgba(255,255,255,0.8);
-  border-radius:14px;
-  padding:6vw;
-  box-shadow:0 4px 25px rgba(0,0,0,0.06);
-  text-align:center;
-  transition:.3s;
-}
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 25px rgba(46,169,255,0.15);}
-.card span{font-size:7vw;display:block;margin-bottom:1vh;}
-.card p{font-size:4vw;color:var(--muted);}
-
-/* SYNC / FOOTER */
-.sync{
-  text-align:center;
-  margin-top:10vh;
-  font-family:monospace;
-  font-size:3.8vw;
-  color:var(--muted);
-}
-.cta{
-  text-align:center;margin-top:6vh;
-}
+/* ===== CTA ===== */
+.cta{text-align:center;margin-top:6vh;}
 .cta a{
   background:linear-gradient(90deg,var(--blue),var(--orange));
-  color:#fff;
-  text-decoration:none;
-  padding:4vw 8vw;
-  border-radius:30px;
-  font-weight:600;
-  font-size:4vw;
+  color:#fff;text-decoration:none;
+  padding:4vw 8vw;border-radius:30px;
+  font-weight:600;font-size:4vw;
   box-shadow:0 6px 20px rgba(46,169,255,.25);
   transition:.4s;
 }
 .cta a:hover{transform:scale(1.05);}
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:10vw 5vw;}
 .confidential{font-size:3.2vw;text-align:center;color:#9aa7b6;}
 
-/* RESPONSIVE */
 @media(min-width:768px){
   h3{font-size:2vw;}
-  .card p{font-size:1rem;}
+  .phase p{font-size:1rem;}
 }
 </style>
 </head>
 <body>
 
-<div class="meta">
-Người yêu cầu: <b>Lữ Minh Trí</b> — Yêu cầu từ <b>Hyper Bot</b> — Người viết: <b>AI AWK Assistant</b> — Giờ: <b>10:53 · 10/11/2025</b> — <b>Xuất bản tự động</b>
+<div class="meta-box">
+  <div class="meta-line"><span>Người yêu cầu:</span> Lữ Minh Trí</div>
+  <div class="meta-line"><span>Yêu cầu từ:</span> Hyper Bot</div>
+  <div class="meta-line"><span>Người viết:</span> AI AWK Assistant</div>
+  <div class="meta-line"><span>Thời gian:</span> 10:53 · 10/11/2025</div>
+  <div class="meta-line"><span>Trạng thái:</span> Xuất bản tự động</div>
 </div>
 
 <header>
@@ -190,21 +177,35 @@ Người yêu cầu: <b>Lữ Minh Trí</b> — Yêu cầu từ <b>Hyper Bot</b> 
   <h1>AI AWK SYSTEM</h1>
   <h2>AGENDA — 11·11·2025</h2>
   <hr class="neural">
-  <p>Hyper One Internal Intelligence Module<br>System Status: <span style="color:#00A86B;">ONLINE</span></p>
+  <p>Hyper One Internal Intelligence Module<br>Status: <span style="color:#00A86B;">ACTIVE</span></p>
 </header>
 
-<section class="ai-summary">
-  <h3>AI Summary ▸ 4 Focus Phases</h3>
-  <ul>
-    <li><b>Phase 1: Build & Validate</b> — Hoàn thiện 10/88 buổi, test đầu vào.</li>
-    <li><b>Phase 2: Platform & Parents</b> — Triển khai cơ sở dạy & tương tác phụ huynh.</li>
-    <li><b>Phase 3: Operate & Scale</b> — Gom lớp, đào tạo, vận hành.</li>
-    <li><b>Phase 4: Reflect & Upgrade</b> — Tổng kết, rút dữ liệu, hoàn thiện 88 buổi.</li>
-  </ul>
+<section>
+  <h3>Agenda Overview ▸ Strategic Phases</h3>
+  <div class="phase">
+    <h4>Phase 1: Build & Validate</h4>
+    <p>Hoàn thiện 10/88 buổi đầu tiên của chương trình, tập trung vào tính logic, trực quan và trải nghiệm học tập.  
+    Thiết lập bộ tiêu chuẩn đầu ra cho mỗi nhóm tuổi.  
+    Thực hiện các buổi thử nghiệm thực tế với nhóm học sinh mục tiêu.</p>
+
+    <h4>Phase 2: Platform & Parents</h4>
+    <p>Xây dựng nền tảng học tập thống nhất — tạm thời dạy qua Zoom, chuyển dần sang hệ thống awk.edu.vn.  
+    Thiết kế khu vực dành cho phụ huynh: theo dõi tiến độ, phản hồi kết quả, và nhận thông báo học tập.</p>
+
+    <h4>Phase 3: Operate & Scale</h4>
+    <p>Tổ chức 3 lớp pilot đầu tiên, tối ưu quy trình sale – onboarding – vận hành.  
+    Huấn luyện giáo viên qua hệ thống AWK Internal.  
+    Đo lường mức độ hài lòng và hiệu quả học của học viên sau mỗi buổi học.</p>
+
+    <h4>Phase 4: Reflect & Upgrade</h4>
+    <p>Tổng hợp phản hồi từ giáo viên và phụ huynh để hiệu chỉnh giáo trình.  
+    Chuẩn hóa toàn bộ 88 buổi, phát triển Level 2 (AI Logic & Sáng tạo).  
+    Chuẩn bị sự kiện <b>AI Wiz Kids Exhibition</b> để giới thiệu kết quả giai đoạn đầu.</p>
+  </div>
 </section>
 
-<section class="ai-insight">
-  <h3>Insight Layer ▸ Data Processing</h3>
+<section>
+  <h3>Insight Layer ▸ System Data</h3>
   <div class="console">
     <p>DATA SOURCES   ▸ 76 files analyzed <span class="ok">✓</span></p>
     <p>DISCUSSIONS    ▸ 2 004 segments parsed <span class="ok">✓</span></p>
@@ -213,32 +214,23 @@ Người yêu cầu: <b>Lữ Minh Trí</b> — Yêu cầu từ <b>Hyper Bot</b> 
   </div>
 </section>
 
-<section class="ai-dashboard">
-  <h3>Action Dashboard ▸ Recommendations</h3>
-  <div class="cards">
-    <div class="card">
-      <span>🧩</span>
-      <p>Tạo chuỗi video học thử – gắn QR vào brochure phụ huynh.</p>
-    </div>
-    <div class="card">
-      <span>📈</span>
-      <p>Đưa dữ liệu feedback lớp pilot vào model cải tiến giáo trình.</p>
-    </div>
-    <div class="card">
-      <span>🎯</span>
-      <p>Thiết lập “AI Wall” – hiển thị sản phẩm của trẻ theo thời gian thực.</p>
-    </div>
+<section>
+  <h3>Action Dashboard ▸ AI Recommendations</h3>
+  <div class="phase">
+    <p>🧩 Tạo chuỗi video ngắn (1–2 phút) minh họa hoạt động trong lớp — dùng làm công cụ marketing thực chiến.</p>
+    <p>📈 Thiết lập bảng điều khiển dữ liệu học viên theo thời gian thực — phục vụ quản trị và huấn luyện.</p>
+    <p>🎯 Ra mắt “AI Wall” – nền tảng trưng bày sản phẩm học tập và thành tích của học sinh.</p>
   </div>
 </section>
 
-<section class="ai-sync">
+<section>
   <h3>System Sync ▸ awk.edu.vn/core</h3>
-  <div class="sync">
-    Đồng bộ hoàn tất — Phiên bản <b>v1.0.8</b> đã xác nhận.<br>
-    Hệ thống chuyển sang trạng thái: <span style="color:#00A86B;">STABLE MODE</span>
-  </div>
-  <div class="cta">
-    <a href="https://awk.edu.vn" target="_blank">↗ Return to Main System</a>
+  <div class="phase">
+    <p>Toàn bộ dữ liệu đã được đồng bộ với nền tảng awk.edu.vn.  
+    Phiên bản hệ thống hiện tại: <b>v1.0.8</b> — xác nhận <span style="color:#00A86B;">STABLE MODE</span>.</p>
+    <div class="cta">
+      <a href="https://awk.edu.vn" target="_blank">↗ Return to Main System</a>
+    </div>
   </div>
 </section>
 
