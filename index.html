@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Wiz Kids — Agenda 11.11.2025</title>
+<title>AI Wiz Kids Agenda 11.11.2025</title>
 
 <style>
   :root {
@@ -21,8 +21,11 @@
     padding: 0;
     font-family: "Inter", system-ui, sans-serif;
     background: var(--bg);
-    overflow-x: hidden;
+    color: var(--ink);
     scroll-behavior: smooth;
+    height: 100%;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
   }
 
   /* ==== Animated Gradient Background ==== */
@@ -56,53 +59,28 @@
     to { transform: translateY(60px) scale(1.15); }
   }
 
-  /* ==== Header ==== */
-  header {
-    text-align: center;
-    padding: 120px 20px 60px;
-    opacity: 0;
-    transform: translateY(50px);
-    animation: fadeUp 1.5s ease forwards;
-  }
-  header h1 {
-    font-size: 3.2rem;
-    background: linear-gradient(90deg, var(--blue), var(--orange));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-    letter-spacing: 1px;
-    margin: 0;
-  }
-  header p {
-    margin-top: 12px;
-    color: var(--muted);
-    font-size: 1.2rem;
-  }
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ==== Section ==== */
+  /* ==== Global Section (Slide) ==== */
   section {
-    max-width: 880px;
-    margin: 100px auto;
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 10px 50px rgba(0,0,0,0.05);
-    padding: 70px 70px;
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6vw;
+    box-sizing: border-box;
     position: relative;
     overflow: hidden;
-    transform: translateY(80px) scale(0.98);
     opacity: 0;
+    transform: translateY(60px);
     transition: all 1.2s cubic-bezier(0.19,1,0.22,1);
   }
   section.visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    box-shadow: 0 15px 70px rgba(46,169,255,0.18);
+    transform: translateY(0);
   }
 
-  /* Shimmer highlight */
   section::before {
     content: "";
     position: absolute;
@@ -118,53 +96,60 @@
     to { left: 150%; }
   }
 
-  section h2 {
-    font-size: 1.8rem;
+  h1, h2 {
+    margin: 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--blue), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 2rem;
     color: var(--blue);
-    border-left: 4px solid var(--orange);
-    padding-left: 14px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   }
 
   ul {
     list-style: none;
-    padding-left: 28px;
-    margin: 0;
+    padding: 0;
+    max-width: 700px;
   }
   ul li {
-    margin-bottom: 14px;
-    line-height: 1.7;
-    color: var(--ink);
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 12px;
     position: relative;
-    font-size: 1.05rem;
+    color: var(--ink);
   }
   ul li::before {
     content: "▹";
-    position: absolute;
-    left: -20px;
     color: var(--orange);
-    font-weight: bold;
-  }
-
-  /* ==== Parallax Scroll effect ==== */
-  .parallax {
-    transform: translateY(50px);
-    opacity: 0;
-    transition: all 1s ease;
-  }
-  .parallax.visible {
-    transform: translateY(0);
-    opacity: 1;
+    position: absolute;
+    left: -22px;
   }
 
   /* ==== Footer ==== */
   footer {
     text-align: center;
-    padding: 90px 20px 60px;
+    padding: 40px;
     color: var(--muted);
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
+  /* ==== Responsive ==== */
+  @media (max-width: 768px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.6rem; }
+    ul li { font-size: 1rem; }
+    section { padding: 10vw; }
+  }
 </style>
 </head>
 
@@ -173,31 +158,39 @@
 <div class="orb one"></div>
 <div class="orb two"></div>
 
-<header>
-  <h1>AI Wiz Kids Agenda 11·11·2025</h1>
-  <p>Chốt giáo trình · Nền tảng triển khai · Kế hoạch gom lớp</p>
-</header>
+<section id="slide1">
+  <h1>AI Wiz Kids Agenda<br>11·11·2025</h1>
+  <p style="font-size:1.2rem; color:#5C6F82; text-align:center; max-width:600px;">
+    Chốt giáo trình · Nền tảng triển khai · Kế hoạch gom lớp
+  </p>
+</section>
 
-<section>
+<section id="slide2">
   <h2>1. Mục tiêu cuộc họp</h2>
   <ul>
     <li>Hoàn thiện khung giáo trình 10 buổi để có thể dạy ngay.</li>
     <li>Xác định nền tảng triển khai giai đoạn 1 (dạy, tài liệu, phụ huynh, quản trị).</li>
     <li>Thống nhất kế hoạch gom lớp và chạy khóa đầu tiên.</li>
   </ul>
+  <p style="margin-top:40px; max-width:700px; color:#5C6F82; text-align:center;">
+    Gợi ý mở rộng: thiết lập bộ tiêu chuẩn đầu ra cho từng độ tuổi để thống nhất giữa giáo viên và phụ huynh.
+  </p>
 </section>
 
-<section>
+<section id="slide3">
   <h2>2. Nội dung chính</h2>
   <ul>
     <li><b>2.1 Giáo trình:</b> Rà soát “Learning Goals”, thống nhất 10 buổi, phân công hoàn thiện nội dung.</li>
-    <li><b>2.2 Nền tảng triển khai:</b> Chọn hình thức dạy (Zoom hoặc awk.edu.vn), xác định các nền tảng hỗ trợ và ưu tiên triển khai.</li>
+    <li><b>2.2 Nền tảng triển khai:</b> Chọn hình thức dạy (Zoom hoặc awk.edu.vn), xác định nền tảng hỗ trợ và ưu tiên triển khai.</li>
     <li><b>2.3 Kế hoạch sale và gom lớp:</b> Mục tiêu số lớp, giá, truyền thông, phân công nhiệm vụ.</li>
     <li><b>2.4 Phân công và mốc hành động:</b> Tổng hợp đầu việc, người phụ trách, thời hạn hoàn thành.</li>
   </ul>
+  <p style="margin-top:40px; max-width:700px; color:#5C6F82; text-align:center;">
+    Gợi ý mở rộng: tạo bộ công cụ dạy nhanh (slide, worksheet, video) để tăng tính nhất quán giữa các lớp demo.
+  </p>
 </section>
 
-<section>
+<section id="slide4">
   <h2>3. Kết quả mong đợi</h2>
   <ul>
     <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy.</li>
@@ -205,6 +198,22 @@
     <li>Kế hoạch mở lớp pilot đầu tiên.</li>
     <li>Phân công công việc rõ ràng, có mốc tiến độ cụ thể.</li>
   </ul>
+  <p style="margin-top:40px; max-width:700px; color:#5C6F82; text-align:center;">
+    Gợi ý mở rộng: sau pilot, tổng hợp dữ liệu phản hồi phụ huynh và học sinh để tinh chỉnh trải nghiệm học tập.
+  </p>
+</section>
+
+<section id="slide5">
+  <h2>4. Hướng phát triển kế tiếp</h2>
+  <ul>
+    <li>Xây dựng 88 buổi hoàn chỉnh cho Level 1–2 dựa trên dữ liệu thực nghiệm.</li>
+    <li>Thiết kế Level 2 (cốt lõi) làm nền tảng tư duy AI logic cho trẻ.</li>
+    <li>Tích hợp hệ thống showcase sản phẩm học sinh trên awk.edu.vn.</li>
+    <li>Phát triển bộ công cụ giáo viên – phụ huynh – quản trị đồng bộ.</li>
+  </ul>
+  <p style="margin-top:40px; max-width:700px; color:#5C6F82; text-align:center;">
+    Gợi ý mở rộng: chuẩn bị “AI Wiz Kids Exhibition” – sự kiện nhỏ để học sinh demo sản phẩm AI đầu tiên của mình.
+  </p>
 </section>
 
 <footer>
@@ -212,9 +221,10 @@
 </footer>
 
 <script>
+  // Reveal on scroll for each slide
   const sections = document.querySelectorAll('section');
   const revealOnScroll = () => {
-    const trigger = window.innerHeight * 0.8;
+    const trigger = window.innerHeight * 0.85;
     sections.forEach(sec => {
       const top = sec.getBoundingClientRect().top;
       if (top < trigger) sec.classList.add('visible');
