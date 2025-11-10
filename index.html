@@ -7,182 +7,170 @@
 
 <style>
   :root {
-    --bg-dark: #030712;
-    --ai-blue: #00e0ff;
-    --ai-green: #00ffa3;
-    --ink: #f4f8ff;
-    --muted: #9bb2cc;
+    --blue: #2EA9FF;
+    --aqua: #00C4FF;
+    --orange: #FFB347;
+    --gold: #FFD074;
+    --ink: #0A0F1C;
+    --muted: #5C6F82;
+    --bg: #F7FAFF;
   }
 
   body {
     margin: 0;
     font-family: "Inter", system-ui, sans-serif;
-    background: radial-gradient(circle at 30% 20%, #06172a, #030712 90%);
+    background: var(--bg);
     color: var(--ink);
     overflow-x: hidden;
   }
 
-  /* ==== BACKGROUND PULSE ==== */
+  /* ---- Gradient flow background ---- */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
-    background: linear-gradient(120deg, rgba(0,224,255,0.2), rgba(0,255,163,0.1), rgba(0,0,0,0.4));
-    background-size: 400% 400%;
-    animation: pulseBg 12s ease infinite;
-    z-index: -2;
+    background: linear-gradient(120deg, rgba(46,169,255,0.12), rgba(255,179,71,0.08), rgba(255,208,116,0.12));
+    background-size: 300% 300%;
+    animation: bgFlow 12s ease-in-out infinite;
+    z-index: -1;
+  }
+  @keyframes bgFlow {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
   }
 
-  @keyframes pulseBg {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* ==== INTRO LOGO ==== */
-  #intro {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--bg-dark);
-    z-index: 1000;
-    animation: introOut 1.2s ease forwards;
-    animation-delay: 2.8s;
-  }
-
-  #intro h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    background: linear-gradient(90deg, var(--ai-blue), var(--ai-green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    opacity: 0;
-    transform: scale(0.8);
-    animation: introText 2s ease forwards;
-  }
-
-  @keyframes introText {
-    30% {opacity: 1; transform: scale(1.1);}
-    70% {opacity: 1; transform: scale(1);}
-    100% {opacity: 1;}
-  }
-
-  @keyframes introOut {
-    to { opacity: 0; visibility: hidden; }
-  }
-
-  /* ==== HEADER ==== */
+  /* ---- Header ---- */
   header {
     text-align: center;
-    padding: 100px 20px 60px;
+    padding: 90px 20px 40px;
     opacity: 0;
     transform: translateY(40px);
-    animation: fadeUp 1s ease forwards;
-    animation-delay: 3s;
+    animation: fadeInUp 1.2s ease forwards;
   }
 
-  header h2 {
-    font-size: 2.8rem;
-    background: linear-gradient(90deg, var(--ai-blue), var(--ai-green));
+  header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--blue), var(--orange));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+    margin: 0;
   }
   header p {
     color: var(--muted);
+    font-size: 1.1rem;
     margin-top: 10px;
   }
 
-  @keyframes fadeUp {
-    to {opacity: 1; transform: translateY(0);}
-  }
-
-  /* ==== SECTION ==== */
-  .section {
+  /* ---- Section ---- */
+  section {
     max-width: 850px;
-    margin: 80px auto;
-    background: rgba(14,21,35,0.65);
-    border-radius: 18px;
-    border: 1px solid rgba(0,224,255,0.2);
-    box-shadow: 0 0 25px rgba(0,224,255,0.1);
-    padding: 50px;
+    margin: 70px auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    padding: 50px 60px;
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transform: translateY(80px);
-    transition: all 1.2s ease;
+    transform: translateY(60px) scale(0.98);
+    transition: all 1s cubic-bezier(0.19,1,0.22,1);
   }
-
-  .section.visible {
+  section.visible {
     opacity: 1;
-    transform: translateY(0);
-    box-shadow: 0 0 35px rgba(0,255,163,0.3);
+    transform: translateY(0) scale(1);
+    box-shadow: 0 12px 50px rgba(46,169,255,0.15);
   }
 
-  .section::before {
+  section::before {
     content: "";
     position: absolute;
-    top: 0; left: -150%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0,224,255,0.2), transparent);
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(46,169,255,0.1), transparent);
     transform: skewX(-20deg);
-    transition: 1s;
+  }
+  section.visible::before {
+    animation: shimmer 2s ease-out forwards;
+  }
+  @keyframes shimmer {
+    to { left: 120%; }
   }
 
-  .section.visible::before {
-    left: 150%;
-    transition: 1.8s ease-out;
-  }
-
-  h3 {
-    color: var(--ai-blue);
-    font-size: 1.5rem;
-    border-left: 3px solid var(--ai-green);
-    padding-left: 12px;
+  section h2 {
+    font-size: 1.6rem;
+    color: var(--blue);
+    border-left: 4px solid var(--orange);
+    padding-left: 14px;
     margin-bottom: 20px;
   }
 
   ul {
     list-style: none;
-    padding-left: 25px;
+    padding-left: 24px;
+    margin: 0;
   }
+
   ul li {
-    margin-bottom: 10px;
-    line-height: 1.6;
+    margin-bottom: 12px;
+    line-height: 1.7;
     position: relative;
+    color: #1c2734;
   }
+
   ul li::before {
     content: "▹";
-    color: var(--ai-green);
     position: absolute;
     left: -20px;
+    color: var(--orange);
+    font-weight: bold;
   }
 
+  /* ---- Animation ---- */
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- Footer ---- */
   footer {
     text-align: center;
+    padding: 70px 20px 60px;
     color: var(--muted);
-    margin-top: 100px;
-    padding-bottom: 60px;
+    font-size: 0.9rem;
   }
 
+  /* ---- Floating circles (AI feel) ---- */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.25;
+    z-index: -1;
+    animation: float 12s ease-in-out infinite;
+  }
+  .orb.one { width: 300px; height: 300px; top: 10%; left: 5%; background: var(--blue);}
+  .orb.two { width: 250px; height: 250px; bottom: 15%; right: 8%; background: var(--orange);}
+  @keyframes float {
+    0%,100% { transform: translateY(0) scale(1);}
+    50% { transform: translateY(40px) scale(1.1);}
+  }
 </style>
 </head>
+
 <body>
 
-<div id="intro">
-  <h1>AI WIZ KIDS</h1>
-</div>
+<div class="orb one"></div>
+<div class="orb two"></div>
 
 <header>
-  <h2>AGENDA 11·11·2025</h2>
+  <h1>AI WIZ KIDS — AGENDA 11·11·2025</h1>
   <p>Chốt giáo trình · Nền tảng triển khai · Kế hoạch gom lớp</p>
 </header>
 
-<section class="section">
-  <h3>1. MỤC TIÊU CUỘC HỌP</h3>
+<section>
+  <h2>1. MỤC TIÊU CUỘC HỌP</h2>
   <ul>
     <li>Hoàn thiện khung giáo trình 10 buổi để có thể dạy ngay.</li>
     <li>Xác định nền tảng triển khai giai đoạn 1 (dạy, tài liệu, phụ huynh, quản trị).</li>
@@ -190,8 +178,8 @@
   </ul>
 </section>
 
-<section class="section">
-  <h3>2. NỘI DUNG CHÍNH</h3>
+<section>
+  <h2>2. NỘI DUNG CHÍNH</h2>
   <ul>
     <li><b>2.1. Giáo trình:</b> Rà soát “Learning Goals”, thống nhất 10 buổi, phân công hoàn thiện nội dung.</li>
     <li><b>2.2. Nền tảng triển khai:</b> Chọn hình thức dạy (Zoom / awk.edu.vn), xác định các nền tảng hỗ trợ và ưu tiên triển khai.</li>
@@ -200,8 +188,8 @@
   </ul>
 </section>
 
-<section class="section">
-  <h3>3. KẾT QUẢ MONG ĐỢI</h3>
+<section>
+  <h2>3. KẾT QUẢ MONG ĐỢI</h2>
   <ul>
     <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy.</li>
     <li>Danh sách nền tảng cần triển khai theo thứ tự ưu tiên.</li>
@@ -215,17 +203,17 @@
 </footer>
 
 <script>
-  // Reveal sections on scroll
-  const sections = document.querySelectorAll('.section');
-  const revealOnScroll = () => {
+  // Scroll reveal effect
+  const sections = document.querySelectorAll('section');
+  const reveal = () => {
     const trigger = window.innerHeight * 0.85;
-    sections.forEach(sec => {
-      const top = sec.getBoundingClientRect().top;
-      if (top < trigger) sec.classList.add('visible');
+    sections.forEach(s => {
+      const top = s.getBoundingClientRect().top;
+      if (top < trigger) s.classList.add('visible');
     });
   };
-  window.addEventListener('scroll', revealOnScroll);
-  window.addEventListener('load', revealOnScroll);
+  window.addEventListener('scroll', reveal);
+  window.addEventListener('load', reveal);
 </script>
 
 </body>
