@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AWK Project — AGENDA | AI Experience Edition v4.5</title>
+<title>AWK Project — AGENDA | AI Core Edition v5.0</title>
 
 <style>
 :root {
@@ -22,105 +22,101 @@ html,body{
   overflow-x:hidden;
   scroll-behavior:smooth;
 }
+
+/* ===== GLOBAL BG MOVEMENT ===== */
 body::before{
   content:"";
   position:fixed;inset:0;
-  background:radial-gradient(circle at 30% 30%,rgba(46,169,255,.12),transparent 60%),
-             radial-gradient(circle at 70% 70%,rgba(255,179,71,.12),transparent 60%);
+  background:radial-gradient(circle at 40% 30%,rgba(46,169,255,.12),transparent 70%),
+             radial-gradient(circle at 60% 70%,rgba(255,179,71,.12),transparent 70%);
   background-size:200% 200%;
-  animation:bgflow 14s ease-in-out infinite alternate;
+  animation:bgflow 18s ease-in-out infinite alternate;
   z-index:-2;
 }
 @keyframes bgflow{0%{background-position:0% 0%}100%{background-position:100% 100%}}
 
-/* ===== META HEADER ===== */
+/* ===== META HEADER (small unobtrusive) ===== */
 .meta-box{
-  position:fixed;top:0;width:100%;
-  background:rgba(255,255,255,0.88);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid rgba(0,0,0,0.05);
-  padding:8px 10px;
-  text-align:center;
-  z-index:10;
+  position:fixed;top:12px;left:16px;
+  background:rgba(255,255,255,0.6);
+  backdrop-filter:blur(8px);
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.05);
+  padding:6px 10px;
+  text-align:left;
+  font-size:0.7rem;
+  color:var(--muted);
   line-height:1.4;
+  z-index:10;
+  max-width:220px;
 }
-.meta-line{
-  font-size:0.85rem;
-  color:var(--ink);
-}
-.meta-line span{
-  font-weight:600;
-  color:var(--blue);
-  display:inline-block;
-  min-width:110px;
-  text-align:right;
-  margin-right:6px;
-}
+.meta-box span{color:var(--blue);font-weight:600;}
 
 /* ===== HEADER ===== */
 header{
-  height:70vh;
+  height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  align-items:flex-start;
-  text-align:left;
-  padding:0 8vw;
-  max-width:90%;
-  margin:0 auto;
+  align-items:center;
+  text-align:center;
   position:relative;
   overflow:hidden;
 }
 
-/* BIG AI ENERGY CORE (center pulse) */
+/* AI CORE glowing center */
 .ai-core{
   position:absolute;
   top:50%;left:50%;
   transform:translate(-50%,-50%);
-  width:340px;height:340px;
-  background:radial-gradient(circle, rgba(46,169,255,0.8) 0%, rgba(255,179,71,0.3) 40%, transparent 70%);
+  width:380px;height:380px;
   border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, rgba(46,169,255,0.9) 0%, rgba(255,179,71,0.6) 40%, transparent 75%);
   filter:blur(80px);
-  opacity:0.7;
-  animation:corePulse 6s ease-in-out infinite;
+  opacity:0.8;
+  animation:corePulse 8s ease-in-out infinite, coreHue 16s linear infinite;
   z-index:-1;
 }
 @keyframes corePulse{
   0%,100%{transform:translate(-50%,-50%) scale(1);}
-  50%{transform:translate(-50%,-50%) scale(1.3);}
+  50%{transform:translate(-50%,-50%) scale(1.25);}
+}
+@keyframes coreHue{
+  0%{filter:blur(80px) hue-rotate(0deg);}
+  100%{filter:blur(80px) hue-rotate(360deg);}
 }
 
+/* HEADER TEXT */
 header h1{
-  font-size:5.5vw;
+  font-size:6vw;
   font-weight:800;
   background:linear-gradient(90deg,var(--blue),var(--orange));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   letter-spacing:0.03em;
-  margin:1vh 0;
-  filter:drop-shadow(0 0 6px rgba(46,169,255,0.25));
+  margin:0.4em 0 0.2em 0;
 }
 header h2{
-  font-size:3.5vw;
+  font-size:3.8vw;
   color:var(--muted);
-  margin:0 0 1vh 0;
   font-weight:500;
+  margin:0;
 }
 header p{
   font-family:monospace;
   font-size:3.2vw;
   color:var(--muted);
   line-height:1.5;
-  margin:0;
+  margin-top:1.5vh;
 }
 @media(min-width:768px){
-  .ai-core{width:420px;height:420px;filter:blur(120px);}
-  header h1{font-size:2.4vw;}
-  header h2{font-size:1.2vw;}
+  .ai-core{width:520px;height:520px;filter:blur(120px);}
+  header h1{font-size:2.6vw;}
+  header h2{font-size:1.3vw;}
   header p{font-size:1vw;}
 }
 
-/* ===== SECTIONS ===== */
+/* ===== SECTION STRUCTURE ===== */
 section{padding:10vh 8vw;}
 h3{
   text-align:center;
@@ -199,13 +195,13 @@ footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:8vh 5vw;}
 <body>
 
 <div class="meta-box">
-  <div class="meta-line"><span>Người yêu cầu:</span> Lữ Minh Trí</div>
-  <div class="meta-line"><span>Yêu cầu từ:</span> Hyper Bot</div>
-  <div class="meta-line"><span>Người viết:</span> AI AWK Assistant</div>
-  <div class="meta-line"><span>Thời gian:</span> 11:50 · 10/11/2025</div>
-  <div class="meta-line"><span>Trạng thái:</span> Xuất bản tự động</div>
-  <div class="meta-line"><span>Điều chỉnh:</span> KHÔNG CAN THIỆP</div>
-  <div class="meta-line"><span>Độ tin cậy:</span> 92%</div>
+  <div><span>Người yêu cầu:</span> Lữ Minh Trí</div>
+  <div><span>Yêu cầu từ:</span> Hyper Bot</div>
+  <div><span>Người viết:</span> AI AWK Assistant</div>
+  <div><span>Thời gian:</span> 11:50 · 10/11/2025</div>
+  <div><span>Trạng thái:</span> Xuất bản tự động</div>
+  <div><span>Điều chỉnh:</span> KHÔNG CAN THIỆP</div>
+  <div><span>Độ tin cậy:</span> 92%</div>
 </div>
 
 <header>
@@ -220,51 +216,44 @@ footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:8vh 5vw;}
   <h3>Agenda ▸ Immediate Action Framework</h3>
   <div class="phase">
     <h4>Phase 1 — Curriculum Finalization</h4>
-    <p>Hoàn thiện 10 buổi đầu tiên để bắt đầu dạy ngay.  
-    Chốt nội dung, chủ đề, hoạt động và trải nghiệm học thực tế.  
-    <b>Nguyên tắc:</b> Soạn đủ để dạy – không chờ hoàn hảo. Sau vòng đầu tiên, hiệu chỉnh theo phản hồi.  
-    <b>Deadline:</b> 12/11 – giáo trình phải sẵn sàng.</p>
+    <p>Hoàn thiện 10 buổi đầu tiên để có thể dạy ngay.  
+    Chốt nội dung, hoạt động, hình ảnh minh họa và cấu trúc từng buổi.  
+    Nguyên tắc: <b>soạn để dạy được</b>, không chờ hoàn hảo.</p>
 
     <h4>Phase 2 — Platform Decision</h4>
-    <p>Chuyển đổi số hẳn sang <b>awk.edu.vn</b> hoặc tạm dạy qua Zoom, đảm bảo toàn bộ tài liệu – bài học – phản hồi đều lưu trên hệ thống.  
-    Các nền tảng cần ưu tiên:  
-    – Tài liệu giảng dạy.  
-    – Phụ huynh theo dõi.  
-    – Share sản phẩm học sinh.  
-    – Dashboard Owner.</p>
+    <p>Ra quyết định chuyển đổi số sang <b>awk.edu.vn</b> hoặc tạm dùng Zoom,  
+    ưu tiên nền tảng số hóa tài liệu, quản lý phụ huynh và học viên tập trung.</p>
 
     <h4>Phase 3 — Sale & Class Formation</h4>
-    <p>Kích hoạt sale ngay, không đợi hoàn chỉnh toàn bộ.  
-    <b>Chiến lược:</b> “VỪA CHẠY – VỪA XẾP HÀNG” – có học viên → gom lớp → dạy Zoom.  
-    Chuẩn bị bộ Q&A sale và thông điệp truyền thông (focus: trải nghiệm học AI thực tế, lớp nhỏ, hiệu quả nhanh).  
-    <b>Sale timeline:</b> mở liên tục – gom lớp khi đạt 8–10 học viên.</p>
+    <p>Kích hoạt kế hoạch sale ngay khi giáo trình hoàn thiện khung.  
+    Triển khai nguyên tắc <b>“vừa chạy – vừa xếp hàng”</b>: có học viên thì mở lớp, gom song song.  
+    Xây Q&A cho phụ huynh và bộ thông điệp sale (trải nghiệm AI thực tế, lớp nhỏ, hiệu quả nhanh).</p>
 
-    <h4>Phase 4 — Management System Setup</h4>
-    <p>Xây dựng nền tảng quản trị toàn diện quanh lớp học:  
-    – Kho tài liệu trên awk.edu.vn.  
-    – Giao diện phụ huynh theo dõi.  
-    – “AI Wall” hiển thị sản phẩm học viên.  
-    – Dashboard quản trị lớp, tiến độ, doanh thu.  
-    Mục tiêu: chuẩn hóa để scale nhanh sau lớp đầu tiên.</p>
+    <h4>Phase 4 — Management Setup</h4>
+    <p>Tạo hệ thống quản trị quanh lớp học:  
+    – Kho tài liệu số.  
+    – Bảng phụ huynh theo dõi tiến độ.  
+    – “AI Wall” trưng bày sản phẩm học viên.  
+    – Dashboard quản trị lớp, hiệu suất, doanh thu.</p>
   </div>
 </section>
 
 <section>
   <h3>Insight Layer ▸ System Log</h3>
   <div class="console">
-    <p>PROJECT STATUS  ▸ On Hold → Reactivate 11/11 <span class="ok">✓</span></p>
-    <p>CURRICULUM     ▸ 10 buổi khung logic – in progress</p>
-    <p>PLATFORM       ▸ Zoom + awk.edu.vn / pending final check</p>
-    <p>SALES MODE     ▸ READY — waiting trigger</p>
+    <p>PROJECT STATUS  ▸ Reactivation date 11/11 <span class="ok">✓</span></p>
+    <p>CURRICULUM     ▸ 10 buổi khung logic — in progress</p>
+    <p>PLATFORM       ▸ Zoom + awk.edu.vn — evaluating transition</p>
+    <p>SALES MODE     ▸ READY — waiting activation trigger</p>
   </div>
 </section>
 
 <section>
   <h3>AI Recommendations ▸ Push Protocol</h3>
   <div class="phase">
-    <p>⚙️ 11/11: Họp chốt nội dung, phân công hoàn thiện từng buổi (1–10).</p>
+    <p>⚙️ Họp 11/11: chốt nội dung từng buổi (1–10), phân công biên soạn.</p>
     <p>🧩 Sau họp: dạy Zoom song song upload nội dung lên awk.edu.vn.</p>
-    <p>📈 Khởi động sale ngay – chia nhóm: content / sale / phụ huynh.  
+    <p>📈 Kích hoạt sale – chia nhóm: content / sale / CS phụ huynh.  
        Mục tiêu: 3 lớp đầu tiên trước 20/11.</p>
     <p>🎯 Hoàn thiện nền tảng tài liệu & dashboard trong lúc dạy thử.</p>
   </div>
@@ -273,7 +262,7 @@ footer{text-align:center;color:var(--muted);font-size:3.5vw;padding:8vh 5vw;}
 <section>
   <h3>System Sync ▸ awk.edu.vn/core</h3>
   <div class="phase" style="text-align:center;">
-    <p>Tất cả dữ liệu được đồng bộ với <b>Hyper One Internal Repository</b>.<br>
+    <p>Tất cả dữ liệu đang được đồng bộ với <b>Hyper One Internal Repository</b>.<br>
     Phiên bản: <b>v0.91 — Pre-Launch</b>.<br>
     Trạng thái: <span style="color:#00A86B;">PUSH MODE ENABLED</span></p>
     <div class="cta">
