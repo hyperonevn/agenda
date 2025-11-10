@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AWK Project — Hyper One Internal Briefing</title>
+<title>AWK Project — AGENDA</title>
 
 <style>
 :root {
@@ -51,7 +51,7 @@ body::before {
   to { transform: translateY(50px) scale(1.1); }
 }
 
-/* Container */
+/* Slider system */
 .slider {
   display: flex;
   transition: transform 1s cubic-bezier(0.19,1,0.22,1);
@@ -67,16 +67,15 @@ body::before {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
+  text-align: center;
 }
 h1 {
-  font-size: 2.8rem;
+  font-size: 3rem;
   background: linear-gradient(90deg, var(--blue), var(--orange));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 800;
   margin-bottom: 16px;
-  text-align: center;
 }
 h2 {
   font-size: 2rem;
@@ -138,11 +137,9 @@ ul li::before {
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(46,169,255,0.3);
 }
-
-/* Typing intro */
 #introText {
   font-family: monospace;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--muted);
   border-right: 3px solid var(--orange);
   white-space: nowrap;
@@ -151,7 +148,7 @@ ul li::before {
   animation: typing 3.5s steps(40, end) forwards, blink 0.8s infinite;
   margin-top: 10px;
 }
-@keyframes typing { to { width: 25ch; } }
+@keyframes typing { to { width: 28ch; } }
 @keyframes blink { 50% { border-color: transparent; } }
 
 footer {
@@ -163,9 +160,9 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.4rem; }
-  ul li { font-size: 0.95rem; }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.5rem; }
+  ul li { font-size: 1rem; }
 }
 </style>
 </head>
@@ -181,45 +178,45 @@ footer {
 
 <div class="slider" id="slider">
 
-  <div class="slide" style="text-align:center;">
-    <h1>AWK PROJECT – INTERNAL BRIEFING</h1>
-    <div id="introText">Khởi động hệ thống AI AWK Assistant...</div>
+  <div class="slide">
+    <h1>AWK PROJECT — AGENDA</h1>
+    <div id="introText">Đang khởi động AI AWK Assistant ...</div>
   </div>
 
   <div class="slide">
     <h2>1. Mục tiêu</h2>
     <ul>
-      <li>Hoàn thiện khung giáo trình 10 buổi để khởi dạy và gom lớp đầu tiên.</li>
-      <li>Xác định nền tảng triển khai: dạy, phụ huynh, showcase, quản trị.</li>
-      <li>Đặt nền móng cho lộ trình phát triển toàn hệ thống AWK.</li>
+      <li>Hoàn thiện 10/88 buổi đầu ( Level 1 – 2 ) làm bộ demo gom lớp và test đầu vào.</li>
+      <li>Xác định nền tảng triển khai giai đoạn 1 (dạy, phụ huynh, showcase, quản trị).</li>
+      <li>Tạo chuẩn chung cho vận hành và đào tạo giáo viên.</li>
     </ul>
   </div>
 
   <div class="slide">
     <h2>2. Nội dung chính</h2>
     <ul>
-      <li><b>Giáo trình:</b> Chuẩn hóa 10 buổi demo dựa trên Learning Goals.</li>
-      <li><b>Nền tảng:</b> Zoom trước – awk.edu.vn sau; đồng bộ tài liệu & dashboard.</li>
-      <li><b>Sale:</b> Kế hoạch gom lớp, chiến dịch truyền thông & workshop demo.</li>
-      <li><b>Quản trị:</b> Phân công người phụ trách, timeline và mốc hoàn thành.</li>
+      <li><b>Giáo trình:</b> Chuẩn hóa 10 buổi demo dựa trên Learning Goals và thử nghiệm thực tế.</li>
+      <li><b>Nền tảng:</b> Zoom → awk.edu.vn; tích hợp dashboard & kho tài liệu nội bộ.</li>
+      <li><b>Gom lớp:</b> Tổ chức 3 pilot class (8 – 10 học viên) để lấy feedback thực tế.</li>
+      <li><b>Phân công:</b> Chốt timeline, người phụ trách và đầu việc cụ thể.</li>
     </ul>
   </div>
 
   <div class="slide">
     <h2>3. Kết quả mong đợi</h2>
     <ul>
-      <li>Bộ khung giáo trình 10 buổi sẵn sàng triển khai.</li>
-      <li>Danh sách nền tảng triển khai theo ưu tiên cụ thể.</li>
-      <li>3 lớp pilot chạy thử và đo lường phản hồi thực tế.</li>
+      <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy và gom lớp.</li>
+      <li>Kế hoạch mở lớp pilot và đo lường hiệu quả học tập.</li>
+      <li>Danh sách nền tảng triển khai theo thứ tự ưu tiên.</li>
     </ul>
   </div>
 
   <div class="slide">
-    <h2>4. Hướng phát triển kế tiếp</h2>
+    <h2>4. Phát triển kế tiếp</h2>
     <ul>
-      <li>Hoàn thiện 88 buổi cho Level 1–2.</li>
-      <li>Chốt Level 2 (Cốt lõi) – nền tảng tư duy AI Logic.</li>
-      <li>Tích hợp showcase học sinh & hệ thống phụ huynh.</li>
+      <li>Hoàn thiện toàn bộ 88 buổi Level 1–2 dựa trên kết quả pilot.</li>
+      <li>Chốt Level 2 (Cốt lõi) — nền tảng Tư duy AI Logic cho trẻ.</li>
+      <li>Tích hợp Showcase học sinh & phụ huynh dashboard.</li>
       <li>Chuẩn bị sự kiện “AI Wiz Kids Exhibition”.</li>
     </ul>
     <div class="cta">
@@ -236,12 +233,14 @@ footer {
 let current = 0;
 const slides = document.querySelectorAll('.slide');
 const slider = document.getElementById('slider');
-function showSlide(index){
-  if(index < 0) index = slides.length - 1;
-  if(index >= slides.length) index = 0;
+
+function showSlide(index) {
+  if (index < 0) index = slides.length - 1;
+  if (index >= slides.length) index = 0;
   current = index;
   slider.style.transform = `translateX(-${index * 100}%)`;
 }
+
 let startX = 0;
 document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
 document.addEventListener('touchend', e => {
@@ -250,8 +249,8 @@ document.addEventListener('touchend', e => {
   if (endX > startX + 50) showSlide(current - 1);
 });
 document.addEventListener('wheel', e => {
-  if(e.deltaY > 0) showSlide(current + 1);
-  if(e.deltaY < 0) showSlide(current - 1);
+  if (e.deltaY > 0) showSlide(current + 1);
+  if (e.deltaY < 0) showSlide(current - 1);
 });
 </script>
 
