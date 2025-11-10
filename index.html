@@ -3,176 +3,170 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AWK Project — Hyper One Briefing</title>
+<title>AWK Project — Hyper One Internal Briefing</title>
 
 <style>
-  :root {
-    --blue: #2EA9FF;
-    --aqua: #00C4FF;
-    --orange: #FFB347;
-    --gold: #FFD074;
-    --ink: #0A0F1C;
-    --muted: #5C6F82;
-    --bg: #F7FAFF;
-  }
+:root {
+  --blue: #2EA9FF;
+  --aqua: #00C4FF;
+  --orange: #FFB347;
+  --gold: #FFD074;
+  --ink: #0A0F1C;
+  --muted: #5C6F82;
+  --bg: #F7FAFF;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  overflow: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(46,169,255,0.15), rgba(255,179,71,0.12), rgba(255,208,116,0.15));
+  background-size: 300% 300%;
+  animation: bgflow 14s ease-in-out infinite;
+  z-index: -2;
+}
+@keyframes bgflow {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+  z-index: -1;
+  animation: float 18s ease-in-out infinite alternate;
+}
+.orb.one { width: 260px; height: 260px; top: 10%; left: 5%; background: var(--blue);}
+.orb.two { width: 220px; height: 220px; bottom: 10%; right: 10%; background: var(--orange);}
+@keyframes float {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(50px) scale(1.1); }
+}
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    font-family: "Inter", system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    scroll-behavior: smooth;
-    height: 100%;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-  }
+/* Container */
+.slider {
+  display: flex;
+  transition: transform 1s cubic-bezier(0.19,1,0.22,1);
+  width: 100%;
+  height: 100vh;
+}
+.slide {
+  min-width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 8vh 8vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+h1 {
+  font-size: 2.8rem;
+  background: linear-gradient(90deg, var(--blue), var(--orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  margin-bottom: 16px;
+  text-align: center;
+}
+h2 {
+  font-size: 2rem;
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  max-width: 700px;
+}
+ul li {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  position: relative;
+  color: var(--ink);
+  line-height: 1.7;
+}
+ul li::before {
+  content: "▹";
+  color: var(--orange);
+  position: absolute;
+  left: -20px;
+}
+.meta {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  color: var(--ink);
+  font-size: 0.9rem;
+  padding: 8px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  z-index: 10;
+}
+.confidential {
+  position: fixed;
+  bottom: 8px;
+  right: 20px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  opacity: 0.8;
+}
+.cta a {
+  display: inline-block;
+  margin-top: 40px;
+  background: linear-gradient(90deg, var(--blue), var(--orange));
+  color: white;
+  text-decoration: none;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+}
+.cta a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(46,169,255,0.3);
+}
 
-  /* ==== Animated Gradient Background ==== */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(46,169,255,0.15), rgba(255,179,71,0.12), rgba(255,208,116,0.15));
-    background-size: 300% 300%;
-    animation: bgflow 14s ease-in-out infinite;
-    z-index: -2;
-  }
-  @keyframes bgflow {
-    0%,100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
+/* Typing intro */
+#introText {
+  font-family: monospace;
+  font-size: 1.2rem;
+  color: var(--muted);
+  border-right: 3px solid var(--orange);
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 3.5s steps(40, end) forwards, blink 0.8s infinite;
+  margin-top: 10px;
+}
+@keyframes typing { to { width: 25ch; } }
+@keyframes blink { 50% { border-color: transparent; } }
 
-  /* ==== Floating Glow Orbs ==== */
-  .orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.25;
-    z-index: -1;
-    animation: float 16s ease-in-out infinite alternate;
-  }
-  .orb.one { width: 280px; height: 280px; top: 10%; left: 5%; background: var(--blue);}
-  .orb.two { width: 220px; height: 220px; bottom: 10%; right: 10%; background: var(--orange);}
-  @keyframes float {
-    from { transform: translateY(0) scale(1); }
-    to { transform: translateY(60px) scale(1.15); }
-  }
+footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
 
-  /* ==== Global Section (Slide) ==== */
-  section {
-    height: 100vh;
-    width: 100%;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 6vw;
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 1.2s cubic-bezier(0.19,1,0.22,1);
-  }
-  section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  section::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -120%;
-    width: 120%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(46,169,255,0.1), transparent);
-    transform: skewX(-20deg);
-  }
-  section.visible::before {
-    animation: shimmer 1.8s ease-out forwards;
-  }
-  @keyframes shimmer {
-    to { left: 150%; }
-  }
-
-  h1, h2 {
-    margin: 0;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    background: linear-gradient(90deg, var(--blue), var(--orange));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 20px;
-  }
-
-  h2 {
-    font-size: 2rem;
-    color: var(--blue);
-    margin-bottom: 30px;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
-    max-width: 700px;
-  }
-  ul li {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    margin-bottom: 12px;
-    position: relative;
-    color: var(--ink);
-  }
-  ul li::before {
-    content: "▹";
-    color: var(--orange);
-    position: absolute;
-    left: -22px;
-  }
-
-  p.meta {
-    color: var(--muted);
-    text-align: center;
-    font-size: 0.95rem;
-    margin-top: 20px;
-  }
-
-  .cta {
-    margin-top: 50px;
-    text-align: center;
-  }
-  .cta a {
-    background: linear-gradient(90deg, var(--blue), var(--orange));
-    color: white;
-    text-decoration: none;
-    padding: 16px 36px;
-    border-radius: 30px;
-    font-weight: 600;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    transition: all 0.4s ease;
-  }
-  .cta a:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(46,169,255,0.3);
-  }
-
-  footer {
-    text-align: center;
-    padding: 30px;
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 768px) {
-    h1 { font-size: 2.3rem; }
-    h2 { font-size: 1.6rem; }
-    ul li { font-size: 1rem; }
-  }
+/* Responsive */
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.4rem; }
+  ul li { font-size: 0.95rem; }
+}
 </style>
 </head>
 
@@ -181,76 +175,84 @@
 <div class="orb one"></div>
 <div class="orb two"></div>
 
-<section id="intro">
-  <h1>AWK Project — Hyper One Briefing</h1>
-  <p style="font-size:1.1rem; color:#5C6F82; max-width:600px; text-align:center;">
-    Chốt giáo trình · Triển khai nền tảng · Kế hoạch gom lớp  
-  </p>
-  <p class="meta">
-    Người yêu cầu: <b>Lữ Minh Trí</b>  
-    <br>Yêu cầu gửi trực tiếp từ <b>Hyper Bot</b>  
-    <br>Người viết: <b>AI Assistant</b>  
-    <br>Giờ soạn: <b>10:53 – 10/11/2025</b>
-  </p>
-</section>
+<div class="meta">
+  Người yêu cầu: <b>Lữ Minh Trí</b> — Yêu cầu từ <b>Hyper Bot</b> — Người viết: <b>AI AWK Assistant</b> — Giờ: <b>10:53 · 10/11/2025</b> — <b>Xuất bản tự động</b>
+</div>
 
-<section id="slide2">
-  <h2>1. Mục tiêu</h2>
-  <ul>
-    <li>Hoàn thiện khung giáo trình 10 buổi để bắt đầu dạy và gom lớp.</li>
-    <li>Xác định nền tảng triển khai (dạy, phụ huynh, quản trị, showcase).</li>
-    <li>Thống nhất tiến trình chạy thử và thu dữ liệu phản hồi.</li>
-  </ul>
-</section>
+<div class="slider" id="slider">
 
-<section id="slide3">
-  <h2>2. Nội dung chính</h2>
-  <ul>
-    <li><b>Giáo trình:</b> Rà soát “Learning Goals”, thống nhất 10 buổi mẫu.</li>
-    <li><b>Nền tảng triển khai:</b> Dạy qua Zoom, tiến tới awk.edu.vn.</li>
-    <li><b>Gom lớp:</b> Chuẩn bị sale, truyền thông, CS và demo thực tế.</li>
-    <li><b>Phân công:</b> Chốt timeline – người phụ trách – đầu việc cụ thể.</li>
-  </ul>
-</section>
-
-<section id="slide4">
-  <h2>3. Kết quả mong đợi</h2>
-  <ul>
-    <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy.</li>
-    <li>Kế hoạch gom lớp và mở 3 lớp pilot đầu tiên.</li>
-    <li>Bản roadmap triển khai nền tảng awk.edu.vn.</li>
-  </ul>
-</section>
-
-<section id="slide5">
-  <h2>4. Hướng phát triển kế tiếp</h2>
-  <ul>
-    <li>Hoàn thiện toàn bộ 88 buổi học cho Level 1–2.</li>
-    <li>Chốt Level 2 (Cốt lõi) – nền tảng tư duy AI logic cho trẻ.</li>
-    <li>Tích hợp hệ thống showcase sản phẩm học sinh.</li>
-    <li>Chuẩn bị sự kiện “AI Wiz Kids Exhibition”.</li>
-  </ul>
-  <div class="cta">
-    <a href="https://awk.edu.vn" target="_blank">Truy cập trang chủ awk.edu.vn</a>
+  <div class="slide" style="text-align:center;">
+    <h1>AWK PROJECT – INTERNAL BRIEFING</h1>
+    <div id="introText">Khởi động hệ thống AI AWK Assistant...</div>
   </div>
-</section>
 
-<footer>
-  © 2025 AWK Project — Hyper One | Generated by AI Assistant
-</footer>
+  <div class="slide">
+    <h2>1. Mục tiêu</h2>
+    <ul>
+      <li>Hoàn thiện khung giáo trình 10 buổi để khởi dạy và gom lớp đầu tiên.</li>
+      <li>Xác định nền tảng triển khai: dạy, phụ huynh, showcase, quản trị.</li>
+      <li>Đặt nền móng cho lộ trình phát triển toàn hệ thống AWK.</li>
+    </ul>
+  </div>
+
+  <div class="slide">
+    <h2>2. Nội dung chính</h2>
+    <ul>
+      <li><b>Giáo trình:</b> Chuẩn hóa 10 buổi demo dựa trên Learning Goals.</li>
+      <li><b>Nền tảng:</b> Zoom trước – awk.edu.vn sau; đồng bộ tài liệu & dashboard.</li>
+      <li><b>Sale:</b> Kế hoạch gom lớp, chiến dịch truyền thông & workshop demo.</li>
+      <li><b>Quản trị:</b> Phân công người phụ trách, timeline và mốc hoàn thành.</li>
+    </ul>
+  </div>
+
+  <div class="slide">
+    <h2>3. Kết quả mong đợi</h2>
+    <ul>
+      <li>Bộ khung giáo trình 10 buổi sẵn sàng triển khai.</li>
+      <li>Danh sách nền tảng triển khai theo ưu tiên cụ thể.</li>
+      <li>3 lớp pilot chạy thử và đo lường phản hồi thực tế.</li>
+    </ul>
+  </div>
+
+  <div class="slide">
+    <h2>4. Hướng phát triển kế tiếp</h2>
+    <ul>
+      <li>Hoàn thiện 88 buổi cho Level 1–2.</li>
+      <li>Chốt Level 2 (Cốt lõi) – nền tảng tư duy AI Logic.</li>
+      <li>Tích hợp showcase học sinh & hệ thống phụ huynh.</li>
+      <li>Chuẩn bị sự kiện “AI Wiz Kids Exhibition”.</li>
+    </ul>
+    <div class="cta">
+      <a href="https://awk.edu.vn" target="_blank">↗ Về trang chủ awk.edu.vn</a>
+    </div>
+  </div>
+
+</div>
+
+<div class="confidential">TÀI LIỆU NỘI BỘ — CONFIDENTIAL</div>
+<footer>© 2025 AWK Project — Hyper One</footer>
 
 <script>
-  // Reveal animation
-  const sections = document.querySelectorAll('section');
-  const reveal = () => {
-    const trigger = window.innerHeight * 0.85;
-    sections.forEach(s => {
-      const top = s.getBoundingClientRect().top;
-      if (top < trigger) s.classList.add('visible');
-    });
-  };
-  window.addEventListener('scroll', reveal);
-  window.addEventListener('load', reveal);
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const slider = document.getElementById('slider');
+function showSlide(index){
+  if(index < 0) index = slides.length - 1;
+  if(index >= slides.length) index = 0;
+  current = index;
+  slider.style.transform = `translateX(-${index * 100}%)`;
+}
+let startX = 0;
+document.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+document.addEventListener('touchend', e => {
+  const endX = e.changedTouches[0].clientX;
+  if (endX < startX - 50) showSlide(current + 1);
+  if (endX > startX + 50) showSlide(current - 1);
+});
+document.addEventListener('wheel', e => {
+  if(e.deltaY > 0) showSlide(current + 1);
+  if(e.deltaY < 0) showSlide(current - 1);
+});
 </script>
 
 </body>
