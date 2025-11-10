@@ -23,7 +23,7 @@
     overflow-x: hidden;
   }
 
-  /* background matrix glow */
+  /* Nền hiệu ứng chuyển sáng */
   body::before {
     content: "";
     position: fixed;
@@ -42,104 +42,98 @@
 
   header {
     text-align: center;
-    padding: 60px 20px 40px;
+    padding: 80px 20px 40px;
   }
+
   header h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     background: linear-gradient(90deg, var(--ai-blue), var(--ai-green));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 2px;
   }
+
   header p {
     color: var(--muted);
     font-size: 1.1rem;
   }
 
-  .agenda {
+  .section {
     max-width: 850px;
-    margin: 0 auto;
-    background: rgba(14,21,35,0.8);
+    margin: 80px auto;
+    background: rgba(14,21,35,0.7);
     border: 1px solid rgba(0,224,255,0.2);
     border-radius: 16px;
-    box-shadow: 0 0 30px rgba(0,224,255,0.15);
-    padding: 40px 50px;
+    box-shadow: 0 0 30px rgba(0,224,255,0.1);
+    padding: 50px;
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1s ease;
   }
 
-  .agenda::before {
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 35px rgba(0,255,163,0.3);
+  }
+
+  .section::before {
     content: "";
     position: absolute;
     top: -50%;
     left: -50%;
     width: 200%;
     height: 200%;
-    background: conic-gradient(from 0deg, transparent, rgba(0,224,255,0.2), transparent 30%);
+    background: conic-gradient(from 0deg, transparent, rgba(0,224,255,0.25), transparent 30%);
     animation: rotate 8s linear infinite;
+    z-index: 0;
   }
 
   @keyframes rotate {
     100% { transform: rotate(360deg); }
   }
 
-  .agenda h2 {
+  h2 {
     color: var(--ai-blue);
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     border-left: 3px solid var(--ai-green);
     padding-left: 12px;
-    margin-top: 40px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
   }
 
   ul {
     list-style: none;
-    padding-left: 20px;
+    padding-left: 25px;
+    position: relative;
+    z-index: 1;
   }
+
   ul li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    line-height: 1.6;
     position: relative;
   }
+
   ul li::before {
-    content: "✦";
+    content: "▹";
     color: var(--ai-green);
     position: absolute;
     left: -20px;
     top: 0;
   }
 
-  .section {
-    margin-bottom: 40px;
-  }
-
   footer {
     text-align: center;
     color: var(--muted);
     font-size: 0.9rem;
-    margin-top: 60px;
-    padding-bottom: 30px;
+    margin-top: 80px;
+    padding-bottom: 50px;
   }
 
-  /* subtle appear animation */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 0.8s ease forwards;
-  }
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* glow border pulse */
-  @keyframes pulse {
-    0%,100% { box-shadow: 0 0 20px rgba(0,224,255,0.3);}
-    50% { box-shadow: 0 0 35px rgba(0,255,163,0.4);}
-  }
-  .agenda:hover {
-    animation: pulse 3s infinite;
-  }
 </style>
 </head>
 
@@ -149,39 +143,53 @@
     <p>Chốt giáo trình · Nền tảng triển khai · Kế hoạch gom lớp</p>
   </header>
 
-  <div class="agenda fade-in">
-    <div class="section">
-      <h2>1. MỤC TIÊU CUỘC HỌP</h2>
-      <ul>
-        <li>Hoàn thiện khung giáo trình 10 buổi để có thể dạy ngay.</li>
-        <li>Xác định nền tảng triển khai giai đoạn 1 (dạy, tài liệu, phụ huynh, quản trị).</li>
-        <li>Thống nhất kế hoạch gom lớp và chạy khóa đầu tiên.</li>
-      </ul>
-    </div>
+  <div class="section" id="section1">
+    <h2>1. MỤC TIÊU CUỘC HỌP</h2>
+    <ul>
+      <li>Hoàn thiện khung giáo trình 10 buổi để có thể dạy ngay.</li>
+      <li>Xác định nền tảng triển khai giai đoạn 1 (dạy, tài liệu, phụ huynh, quản trị).</li>
+      <li>Thống nhất kế hoạch gom lớp và chạy khóa đầu tiên.</li>
+    </ul>
+  </div>
 
-    <div class="section">
-      <h2>2. NỘI DUNG CHÍNH</h2>
-      <ul>
-        <li><b>2.1. Giáo trình:</b> Rà soát “Learning Goals”, thống nhất 10 buổi, phân công hoàn thiện nội dung.</li>
-        <li><b>2.2. Nền tảng triển khai:</b> Chọn hình thức dạy (Zoom / awk.edu.vn), xác định các nền tảng hỗ trợ và ưu tiên triển khai.</li>
-        <li><b>2.3. Kế hoạch sale và gom lớp:</b> Mục tiêu số lớp, giá, truyền thông, phân công nhiệm vụ.</li>
-        <li><b>2.4. Phân công & mốc hành động:</b> Tổng hợp đầu việc, người phụ trách, deadline.</li>
-      </ul>
-    </div>
+  <div class="section" id="section2">
+    <h2>2. NỘI DUNG CHÍNH</h2>
+    <ul>
+      <li><b>2.1. Giáo trình:</b> Rà soát “Learning Goals”, thống nhất 10 buổi, phân công hoàn thiện nội dung.</li>
+      <li><b>2.2. Nền tảng triển khai:</b> Chọn hình thức dạy (Zoom / awk.edu.vn), xác định các nền tảng hỗ trợ và ưu tiên triển khai.</li>
+      <li><b>2.3. Kế hoạch sale và gom lớp:</b> Mục tiêu số lớp, giá, truyền thông, phân công nhiệm vụ.</li>
+      <li><b>2.4. Phân công & mốc hành động:</b> Tổng hợp đầu việc, người phụ trách, deadline.</li>
+    </ul>
+  </div>
 
-    <div class="section">
-      <h2>3. KẾT QUẢ MONG ĐỢI</h2>
-      <ul>
-        <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy.</li>
-        <li>Danh sách nền tảng cần triển khai theo thứ tự ưu tiên.</li>
-        <li>Kế hoạch mở lớp pilot đầu tiên.</li>
-        <li>Phân công công việc rõ ràng và thời hạn cụ thể.</li>
-      </ul>
-    </div>
+  <div class="section" id="section3">
+    <h2>3. KẾT QUẢ MONG ĐỢI</h2>
+    <ul>
+      <li>Bộ khung giáo trình 10 buổi sẵn sàng giảng dạy.</li>
+      <li>Danh sách nền tảng cần triển khai theo thứ tự ưu tiên.</li>
+      <li>Kế hoạch mở lớp pilot đầu tiên.</li>
+      <li>Phân công công việc rõ ràng và thời hạn cụ thể.</li>
+    </ul>
   </div>
 
   <footer>
     © 2025 AI Wiz Kids — Powered by Hyper One
   </footer>
+
+<script>
+  // Hiệu ứng xuất hiện khi cuộn
+  const sections = document.querySelectorAll('.section');
+
+  const revealOnScroll = () => {
+    const trigger = window.innerHeight * 0.85;
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if (top < trigger) sec.classList.add('visible');
+    });
+  };
+
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+</script>
 </body>
 </html>
